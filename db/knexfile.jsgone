@@ -1,0 +1,63 @@
+
+
+const dotenv = require('dotenv');
+const debug = require('debug')('contact');
+dotenv.config({ path: __dirname + '/../.env' });
+
+
+const _Config = {
+    getKnexInstance() {
+        // if (process.env. === 'test') {
+        //     return this.test;
+        // }
+        return this.development;
+    },
+    development: {
+        client: 'pg',
+        connection: {
+            host: process.env.DB_HOST,
+            database: process.env.DB_NAME,
+            user: process.env.DB_USERNAME,
+            password: process.env.DB_PASSWORD,
+            port: process.env.DB_PORT
+        },
+        migrations: {
+            tableName: 'knex_migrations',
+            directory: 'migrations'
+        },
+        acquireConnectionTimeout: 3000,
+        pool: {
+            min: 1,
+            max: 1
+        },
+        seeds: {
+            directory: './seeds/dev'
+        }
+    },
+    test: {
+        client: 'pg',
+        connection: {
+            host: process.env.DB_HOST,
+            database: process.env.DB_NAME,
+            user: process.env.DB_USERNAME,
+            password: process.env.DB_PASSWORD,
+            port: process.env.DB_PORT
+        },
+        migrations: {
+            tableName: 'knex_migrations',
+            directory: 'migrations'
+        },
+        acquireConnectionTimeout: 3000,
+        pool: {
+            min: 1,
+            max: 1
+        },
+        seeds: {
+            directory: './seeds/dev'
+        }
+    }
+};
+
+const knexConfig = _Config.getKnexInstance();
+
+module.exports = knexConfig;

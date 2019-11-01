@@ -1,0 +1,31 @@
+{
+	"extends": [
+		"plugin:@typescript-eslint/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaVersion": 9,
+		"sourceType": "module"
+	},
+	"plugins": ["@typescript-eslint"],
+	"rules": {
+		"max-len": [
+			"error",
+			{ 
+				"code": 120
+			}
+		],
+		"comma-dangle": [
+			"error",
+			"never"
+		],
+		"semi": "error"
+	},
+	"env": {
+		"mocha": true,
+		"es6": true
+	},
+	"globals": {
+		"debug": true
+	}
+}
