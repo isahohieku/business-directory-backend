@@ -10,9 +10,6 @@ import { getUser, addUser } from './auth.data';
 import LoginModel from '../../db/models/login.model';
 import { passwordMatch, generateJWT, pickUserData } from './auth.util';
 
-import { sendMail } from '../../utils/email';
-import { verificationEmail } from '../../utils/email_templates/verification_email';
-import { generateVerificationCode } from '../../utils/generate_verification_code';
 import { main } from '../../constants/main.constants';
 
 class AuthService {
@@ -29,17 +26,6 @@ class AuthService {
             }
 
             const result = await addUser(data);
-
-            const verificationCode = generateVerificationCode;
-
-            const emailTemplate = verificationEmail(verificationCode(), data.fullName);
-
-
-            await sendMail(main.APPEMAILADDRESS, data.email, main.SIGNUPSUBJECT, emailTemplate)
-                .catch((e): void => {
-                    console.log(e);
-                    throw new Error('Error sending email');
-                });
 
             sendSuccess(res, 'auth.controllers.ts', result, messages.REGISTRATION_SUCCESSFUL);
         } catch (e) {
