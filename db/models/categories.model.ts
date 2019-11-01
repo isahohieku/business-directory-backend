@@ -6,12 +6,11 @@ import { knexConfig } from '../../db/knexfile';
 const knex = Knex(knexConfig as Knex.Config);
 Model.knex(knex);
 
-class PhoneModel extends Model {
+class CategoriesModel extends Model {
 
     public id?: string;
-    public contactId?: string;
-    public type?: string;
-    public number?: string;
+    public name?: string;
+    public password?: string;
     public createdAt?: string;
     public updatedAt?: string;
 
@@ -22,7 +21,7 @@ class PhoneModel extends Model {
 
     // Table name is the only required property.
     public static get tableName(): string {
-        return 'phone';
+        return 'categories';
     }
 
 
@@ -49,21 +48,20 @@ class PhoneModel extends Model {
     // See http://json-schema.org/ for more info.
 
     /** An example of the Objection jsonSchema */
-    public static get jsonSchema(): {} {
+    public static get jsonSchema (): {} {
         return {
             type: 'object',
-            required: ['contactId', 'type', 'number'],
+            required: ['name'],
 
             properties: {
-                id: { type: 'integer' },
-                contactId: { type: 'integer' },
-                type: { type: 'string', minLength: 1, maxLength: 255 },
-                number: { type: 'string', minLength: 1, maxLength: 255 },
-                createdAt: { type: 'string' },
-                updatedAt: { type: 'string' }
+                id: {type: 'integer'},
+                parentId: {type: ['integer', 'null']},
+                name: {type: 'string', minLength: 1, maxLength: 255},
+                createdAt: {type: 'string'},
+                updatedAt: {type: 'string'}
             }
         };
     }
 }
 
-export default PhoneModel;
+export default CategoriesModel;
