@@ -23,7 +23,7 @@ const generateEncryptedPassword = async (data: string | undefined): Promise<stri
     return password;
 };
 
-const passwordMatch = async(password: string, hash: string): Promise<boolean | undefined> => {
+const passwordMatch = async (password: string, hash: string): Promise<boolean | undefined> => {
     const match = bcrypt.compare(password, hash);
     return match;
 };
@@ -42,10 +42,10 @@ const pickToken = (req: Request): string | undefined => {
 const verifyTok = (req: Request, res: Response, token: string): string | object | undefined => {
     if (typeof SECRET_KEY === 'string') {
         let decodedToken;
-
+        
         jwt.verify(token, SECRET_KEY, (err, decoded): void => {
             if (err) {
-                throw new CustomError(codes.ERROR_INVALID_TOKEN, messages.ERROR_INVALID_TOKEN, 401);                
+                throw new CustomError(codes.ERROR_INVALID_TOKEN, messages.ERROR_INVALID_TOKEN, 401);
             }
             decodedToken = decoded;
         });
@@ -53,10 +53,10 @@ const verifyTok = (req: Request, res: Response, token: string): string | object 
     }
 };
 
-export { 
-    generateJWT, 
-    generateEncryptedPassword, 
-    passwordMatch, 
+export {
+    generateJWT,
+    generateEncryptedPassword,
+    passwordMatch,
     pickUserData,
     verifyTok,
     pickToken

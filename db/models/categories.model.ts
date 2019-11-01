@@ -10,7 +10,6 @@ class CategoriesModel extends Model {
 
     public id?: string;
     public name?: string;
-    public password?: string;
     public createdAt?: string;
     public updatedAt?: string;
 

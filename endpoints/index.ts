@@ -1,8 +1,9 @@
 import authEndpoints from "../modules/auth/auth.endpoints";
-import contactEndpoints from "../modules/contact/contact.endpoints";
+import categoriesEndpoints from "../modules/categories/categories.endpoints";
 
 
 export default [
     ...authEndpoints,
-    ...contactEndpoints
+    // ...contactEndpoints,
+    ...categoriesEndpoints
 ];

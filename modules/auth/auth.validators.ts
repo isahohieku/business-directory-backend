@@ -1,7 +1,6 @@
 import * as Joi from 'joi';
 import { EndpointHandler } from '../../lib/endpoint.handler';
 import { NextFunction, Request, Response } from 'express';
-import { ErrorService } from '../../services/';
 import { CustomError } from '../../lib/custom.error';
 import { codes } from '../../constants/api_response_codes.constants';
 import { messages } from '../../constants/messages.constants';
@@ -49,8 +48,6 @@ const verifyToken: EndpointHandler = async (req: Request, res: Response, next: N
         if (!token) {
             throw new CustomError(codes.ERROR_MISSING_TOKEN, messages.ERROR_MISSING_TOKEN, 401);
         }
-
-        // console.log(token);
 
         if (token) {
             verifyTok(req, res, token);

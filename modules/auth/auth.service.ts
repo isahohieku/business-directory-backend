@@ -63,7 +63,7 @@ class AuthService {
             }
 
         } catch (e) {
-            next(e);;
+            next(e);
         }
     }
 }

@@ -1,6 +1,6 @@
 import { Route } from '../../lib/endpoint.type';
 import { HttpMethod } from '../../lib/http.methods';
-import { validateCategories } from './categories.validators';
+import { validateCategories, validateUpdateCategories } from './categories.validators';
 import { verifyToken } from '../auth/auth.validators';
 import CategoriesService from './categories.service';
 
@@ -40,7 +40,7 @@ const categoriesEndpoints: Route[] = [
         /**
          * @method verifyToken to verify user token is valid and available
          */
-        middlewares: [verifyToken, validateCategories],
+        middlewares: [verifyToken, validateUpdateCategories],
         /**
          * @method updateCategories is a member of the @class categories.Service to update contact
          */

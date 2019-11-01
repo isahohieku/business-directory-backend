@@ -38,15 +38,19 @@ Promise<CategoriesModel | CategoriesModel[] | undefined | void> => {
 const addCategoriesController = async (req: Request): Promise<CategoriesModel | undefined | void> => {
 
     /**
-     * @param email here is expected to be a member of the @param req
+     * @param name here is expected to be a member of the @param req
      * Should be changed to the appropriate property expected
      */
     const { name } = req.body;
 
+    const data: CategoriesModel = new CategoriesModel;
+
+    data.name = name;
+
     /**
      * @method addCategoriesData shoud also be changed to what is needed (expected)
      */
-    const categories = await addCategoriesData(name)
+    const categories = await addCategoriesData(data)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });

@@ -19,6 +19,7 @@ const getCategoriesData = async (id: string): Promise<CategoriesModel | Categori
  * @method getCategoriesData is a method to get a categories or categoriess
  */
 const getCategoriesDataByValue = async (name: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
+    // console.log(name);
     if (!name) {
         const result = await CategoriesModel.query();
         return result;
@@ -33,7 +34,7 @@ const getCategoriesDataByValue = async (name: string): Promise<CategoriesModel |
  * @method addCategoriesData is a method to add a categories 
  */
 const addCategoriesData = async (categories: CategoriesModel): Promise<CategoriesModel | undefined> => {
-    const result = await CategoriesModel.query().insert(categories).first();
+    const result = await CategoriesModel.query().insert(categories);
     return result;
 };
 

@@ -10,6 +10,11 @@ import { messages } from '../../constants/messages.constants';
 
 const categoriesValidator = Joi.object().keys({
     /** Sample joi schema */
+    name: Joi.string().required()
+});
+
+const categoriesUpdateValidator = Joi.object().keys({
+    /** Sample joi schema */
     id: Joi.number()
         .required(),
     name: Joi.string().required()
@@ -25,6 +30,18 @@ const validateCategories: EndpointHandler = async (req: Request, res: Response, 
     }
 };
 
+const validateUpdateCategories: EndpointHandler
+    = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            await Joi.validate(req.body, categoriesUpdateValidator);
+            next();
+        } catch (e) {
+            const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+            ErrorService.errorHandler(error, req, res, next);
+        }
+    };
+
 export {
-    validateCategories
+    validateCategories,
+    validateUpdateCategories
 };
