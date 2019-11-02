@@ -9,9 +9,8 @@ Model.knex(knex);
 class BusinessCategoriesModel extends Model {
 
     public id?: string;
-    public email?: string;
-    public name?: string;
-    public password?: string;
+    public businessId?: number;
+    public categoryId?: number;
     public createdAt?: string;
     public updatedAt?: string;
 
@@ -52,32 +51,15 @@ class BusinessCategoriesModel extends Model {
     public static get jsonSchema (): {} {
         return {
             type: 'object',
-            required: ['email', 'password', 'name'],
+            required: ['businessId', 'categoryId'],
 
             properties: {
                 id: {type: 'integer'},
                 parentId: {type: ['integer', 'null']},
-                email: {type: 'string', minLength: 1, maxLength: 255},
-                password: {type: 'string', minLength: 1, maxLength: 255},
-                name: {type: 'string', minLength: 1, maxLength: 255},
-                age: {type: 'number'},
+                categoryId: {type: 'number'},
+                businessId: {type: 'number'},
                 createdAt: {type: 'string'},
-                updatedAt: {type: 'string'},
-
-                // Properties defined as objects or arrays are
-                // automatically converted to JSON strings when
-                // writing to database and back to objects and arrays
-                // when reading from database. To override this
-                // behaviour, you can override the
-                // Model.jsonAttributes property.
-                address: {
-                    type: 'object',
-                    properties: {
-                        street: {type: 'string'},
-                        city: {type: 'string'},
-                        zipCode: {type: 'string'}
-                    }
-                }
+                updatedAt: {type: 'string'}
             }
         };
     }

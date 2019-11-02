@@ -10,22 +10,43 @@ import { messages } from '../../constants/messages.constants';
 
 const businessCategoriesValidator = Joi.object().keys({
     /** Sample joi schema */
-    email: Joi.string()
-        .email()
+    businessId: Joi.number()
         .required(),
-    password: Joi.string().required()
+    categoryId: Joi.number().required()
 });
 
-const validateBusinessCategories: EndpointHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
-    try {
-        await Joi.validate(req.body, businessCategoriesValidator);
-        next();
-    } catch (e) {
-        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
-        ErrorService.errorHandler(error, req, res);
-    }
-};
+const businessCategoriesUpdateValidator = Joi.object().keys({
+    /** Sample joi schema */
+    id: Joi.number()
+        .required(),
+    categoryId: Joi.number().required()
+});
+
+
+
+const validateBusinessCategories: EndpointHandler
+    = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            await Joi.validate(req.body, businessCategoriesValidator);
+            next();
+        } catch (e) {
+            const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+            ErrorService.errorHandler(error, req, res, next);
+        }
+    };
+
+const validateBusinessCategoriesUpdate: EndpointHandler
+    = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            await Joi.validate(req.body, businessCategoriesUpdateValidator);
+            next();
+        } catch (e) {
+            const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+            ErrorService.errorHandler(error, req, res, next);
+        }
+    };
 
 export {
-    validateBusinessCategories
+    validateBusinessCategories,
+    validateBusinessCategoriesUpdate
 };

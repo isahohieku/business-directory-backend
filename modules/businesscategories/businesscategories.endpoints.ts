@@ -1,6 +1,6 @@
 import { Route } from '../../lib/endpoint.type';
 import { HttpMethod } from '../../lib/http.methods';
-import { validateBusinessCategories } from './businessCategories.validators';
+import { validateBusinessCategories, validateBusinessCategoriesUpdate } from './businessCategories.validators';
 import { verifyToken } from '../auth/auth.validators';
 import BusinessCategoriesService from './businessCategories.service';
 
@@ -55,7 +55,8 @@ const businessCategoriesEndpoints: Route[] = [
          */
         middlewares: [verifyToken],
         /**
-         * @method removeBusinessCategories is a member of the @class businessCategories.Service to remove businessCategories
+         * @method removeBusinessCategories is a member of the @class businessCategories.Service to remove 
+         * businessCategories
          */
         service: [BusinessCategoriesService.removeBusinessCategories]
     }
