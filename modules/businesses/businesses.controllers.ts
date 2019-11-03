@@ -4,6 +4,9 @@ import { getBusinessesData, addBusinessesData, removeBusinessesData, updateBusin
 import { CustomError } from '../../lib/custom.error';
 import {codes} from '../../constants/api_response_codes.constants';
 import BusinessesModel from '../../db/models/businesses.model';
+import BusinessContactModel from '../../db/models/businesscontact.model';
+import BusinessCategoriesModel from '../../db/models/businesscategories.model';
+import BusinessImagesModel from '../../db/models/businessimages.model';
 
 /**
  * @method getBusinesses to get a businesses by a user
@@ -41,17 +44,41 @@ const addBusinessesController = async(req: Request): Promise<BusinessesModel | u
      * @param name are @param description here is expected to be a member of the @param req
      * Should be changed to the appropriate property expected
      */
-    const { name, description } = req.body;
+    const { name, description, website, phone, location, email, categories, images } = req.body;
 
-    const data = new BusinessesModel;
+    // Meta Data
+    const businessMeta = new BusinessesModel;
 
-    data.name = name;
-    data.description = description;
+    businessMeta.name = name;
+    businessMeta.description = description;
+
+    // Contact Data
+    const businessContact = new BusinessContactModel;
+
+    businessContact.website = website;
+    businessContact.phone = phone;
+    businessContact.location = location;
+    businessContact.email = email;
+
+    // Categories
+    const businessCategories: BusinessCategoriesModel[] =  categories.map((item: any): any => {
+        const businessCategory = new BusinessCategoriesModel;
+        businessCategory.categoryId = item;
+        return businessCategory;
+    });
+
+    // Images
+    const businessImages: BusinessImagesModel[] =  images.map((item: any): any => {
+        const businessImage = new BusinessImagesModel;
+        businessImage.imageUrl = item;
+        return businessImage;
+    });
+
     
     /**
-     * @method addBusinessesData shoud also be changed to what is needed (expected)
+     * @method addBusinessesbusinessMeta shoud also be changed to what is needed (expected)
      */
-    const businesses = await addBusinessesData(data)
+    const businesses = await addBusinessesData(businessMeta, businessContact, businessCategories, businessImages)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });

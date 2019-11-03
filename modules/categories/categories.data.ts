@@ -4,30 +4,36 @@ import CategoriesModel from '../../db/models/categories.model';
  * @param id is the id of categories passed into the @method getCategoriesData
  * @method getCategoriesData is a method to get a categories or categoriess
  */
-const getCategoriesData = async (id: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
-    if (!id) {
-        const result = await CategoriesModel.query();
-        return result;
-    }
+const getCategoriesData =
+    async (id: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
+        if (!id) {
+            const result = await CategoriesModel.query();
+            return result;
+        }
 
-    const result = await CategoriesModel.query().where({ id }).first();
-    return result;
-};
+        const result = await CategoriesModel.query().where({ id }).first();
+        return result;
+    };
 
 /**
  * @param id is the id of categories passed into the @method getCategoriesData
  * @method getCategoriesData is a method to get a categories or categoriess
  */
-const getCategoriesDataByValue = async (name: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
-    // console.log(name);
-    if (!name) {
+const getCategoriesDataByValue =
+    async (name: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
+        if (name) {
+            const result1 = await CategoriesModel.query();
+
+            let result: CategoriesModel[] = [];
+            if (result1.length) {
+                result = result1.filter((item): boolean => item.name.toLowerCase().includes(name.toLowerCase()));
+            }
+            return result;
+        }
+
         const result = await CategoriesModel.query();
         return result;
-    }
-
-    const result = await CategoriesModel.query().where({ name }).first();
-    return result;
-};
+    };
 
 /**
  * @param categories is the id of categories passed into the @method addCategoriesData
@@ -56,7 +62,7 @@ const removeCategoriesData = async (id: string): Promise<number | undefined> => 
     return result;
 };
 
-export { 
+export {
     getCategoriesData,
     getCategoriesDataByValue,
     addCategoriesData,

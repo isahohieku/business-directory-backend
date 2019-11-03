@@ -43,13 +43,14 @@ const addBusinessContactController = async (req: Request): Promise<BusinessConta
      * of the @param req
      * Should be changed to the appropriate property expected
      */
-    const { businessId, website, phone, location } = req.body;
+    const { businessId, website, phone, location, email } = req.body;
 
     const data = new BusinessContactModel;
     data.businessId = businessId;
     data.website = website;
     data.phone = phone;
     data.location = location;
+    data.email = email;
 
     /**
      * @method addBusinessContactData shoud also be changed to what is needed (expected)

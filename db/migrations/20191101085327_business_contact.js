@@ -4,6 +4,7 @@ exports.up = function(knex) {
         table.increments('id').primary();
         table.integer('businessId').notNullable();
         table.string('website').notNullable();
+        table.string('email').notNullable();
         table.string('phone').notNullable();
         table.string('location').notNullable();
         table.timestamp('createdAt');

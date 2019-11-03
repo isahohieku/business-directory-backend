@@ -12,6 +12,7 @@ class BusinessContactModel extends Model {
     public businessId?: number;
     public website?: string;
     public phone?: string;
+    public email?: string;
     public location?: string;
     public createdAt?: string;
     public updatedAt?: string;
@@ -61,6 +62,7 @@ class BusinessContactModel extends Model {
                 businessId: {type: 'integer'},
                 website: {type: 'string', minLength: 1, maxLength: 255},
                 phone: {type: 'string', minLength: 1, maxLength: 255},
+                email: {type: 'string', minLength: 1, maxLength: 255},
                 location: {type: 'string', minLength: 1, maxLength: 255},
                 createdAt: {type: 'string'},
                 updatedAt: {type: 'string'}

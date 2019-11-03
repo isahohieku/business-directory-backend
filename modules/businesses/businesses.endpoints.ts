@@ -27,7 +27,7 @@ const businessesEndpoints: Route[] = [
          * @method verifyToken to verify user token is valid and available
          * @method validateBusinesses to validate businesses data in the body
          */
-        middlewares: [verifyToken, validateBusinesses],
+        middlewares: [verifyToken],
         /**
          * @method addBusinesses is a member of the @class businesses.Service to add contact
          */

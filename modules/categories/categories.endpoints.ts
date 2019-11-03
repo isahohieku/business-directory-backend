@@ -21,15 +21,28 @@ const categoriesEndpoints: Route[] = [
     },
 
     {
-        path: CATEGORIES_URL,
-        method: HttpMethod.POST,
+        path: `${CATEGORIES_URL}/search`,
+        method: HttpMethod.GET,
         /**
          * @method verifyToken to verify user token is valid and available
          * @method validateCategories to validate categories data in the body
          */
-        middlewares: [verifyToken, validateCategories],
+        middlewares: [verifyToken],
         /**
          * @method addCategories is a member of the @class categories.Service to add contact
+         */
+        service: [CategoriesService.getCategories]
+    },
+
+    {
+        path: CATEGORIES_URL,
+        method: HttpMethod.POST,
+        /**
+         * @method verifyToken to verify user token is valid and available
+         */
+        middlewares: [verifyToken, validateCategories],
+        /**
+         * @method updateCategories is a member of the @class categories.Service to update contact
          */
         service: [CategoriesService.addCategories]
     },

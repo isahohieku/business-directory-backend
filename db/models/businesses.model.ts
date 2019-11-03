@@ -21,7 +21,7 @@ class BusinessesModel extends Model {
 
     // Table name is the only required property.
     public static get tableName(): string {
-        return 'businesses';
+        return 'business';
     }
 
 

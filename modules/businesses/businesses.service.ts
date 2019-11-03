@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import {
     getBusinessesController,
     addBusinessesController,
@@ -13,7 +13,7 @@ import { ErrorService } from '../../services';
 class BusinessesService {
     public constructor() { }
 
-    public async getBusinesses(req: Request, res: Response): Promise<void> {
+    public async getBusinesses(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             let data;
             await getBusinessesController(req)
@@ -23,11 +23,11 @@ class BusinessesService {
 
             sendSuccess(res, 'businesses.controllers.ts', data, messages.NO_MESSAGE);
         } catch (e) {
-            ErrorService.errorHandler(e, req, res);
+            ErrorService.errorHandler(e, req, res, next);
         }
     }
 
-    public async addBusinesses(req: Request, res: Response): Promise<void> {
+    public async addBusinesses(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             let data;
             await addBusinessesController(req)
@@ -37,11 +37,11 @@ class BusinessesService {
 
             sendSuccess(res, 'businesses.controller.ts', data, messages.CONTACT_ADDED_SUCCESSFULLY);
         } catch (e) {
-            ErrorService.errorHandler(e, req, res);
+            ErrorService.errorHandler(e, req, res, next);
         }
     }
 
-    public async updateBusinesses(req: Request, res: Response): Promise<void> {
+    public async updateBusinesses(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             let data;
             await updateBusinessesController(req)
@@ -51,11 +51,11 @@ class BusinessesService {
 
             sendSuccess(res, 'businesses.controller.ts', data, messages.CONTACT_UPDATED_SUCCESSFULLY);
         } catch (e) {
-            ErrorService.errorHandler(e, req, res);
+            ErrorService.errorHandler(e, req, res, next);
         }
     }
 
-    public async removeBusinesses(req: Request, res: Response): Promise<void> {
+    public async removeBusinesses(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             let data;
             await removeBusinessesController(req)
@@ -65,7 +65,7 @@ class BusinessesService {
 
             sendSuccess(res, 'businesses.controller.ts', data, messages.CONTACT_REMOVED_SUCCESSFULLY);
         } catch (e) {
-            ErrorService.errorHandler(e, req, res);
+            ErrorService.errorHandler(e, req, res, next);
         }
     }
 }

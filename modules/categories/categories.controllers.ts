@@ -1,6 +1,9 @@
 import { Request } from 'express';
 import { messages } from '../../constants/messages.constants';
-import { getCategoriesData, addCategoriesData, removeCategoriesData, updateCategoriesData } from './categories.data';
+import {
+    getCategoriesData,
+    getCategoriesDataByValue, addCategoriesData, removeCategoriesData, updateCategoriesData
+} from './categories.data';
 import { CustomError } from '../../lib/custom.error';
 import { codes } from '../../constants/api_response_codes.constants';
 import CategoriesModel from '../../db/models/categories.model';
@@ -15,15 +18,26 @@ Promise<CategoriesModel | CategoriesModel[] | undefined | void> => {
      * @param id are expected to be a member of the @param req
      */
     const { id } = req.query;
+    const { term } = req.query;
 
     const data: CategoriesModel = new CategoriesModel;
 
     data.id = id;
 
-    const categories = await getCategoriesData(id)
+    let categories;
+
+    if (term || req.route.path === '/api/categories/search') {
+        return categories = await getCategoriesDataByValue(term)
+            .catch((): void => {
+                throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
+            });
+    }
+
+    categories = await getCategoriesData(id)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });
+
 
     if (!categories) {
         throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.ERROR_CONTACT_FOUND, 404);
