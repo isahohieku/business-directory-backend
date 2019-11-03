@@ -30,32 +30,30 @@ const addBusinessesData = async (business: BusinessesModel,
     contact: BusinessContactModel, categories: BusinessCategoriesModel[],
     images: BusinessImagesModel[]): Promise<any | undefined> => {
 
-    // console.log(contact, images, categories, business);
-    // return;
-
     try {
         const res = await transaction(knex, async (trx: Transaction): Promise<any> => {
             const businessBasic = await BusinessesModel.query(trx).insert(business).first();
     
-            console.log(businessBasic);
-    
             if (businessBasic && businessBasic.id) {
                 contact.businessId = parseInt(businessBasic.id, 10);
+
                 categories = categories.map((item): any => {
                     if (item.categoryId && businessBasic.id) {
                         item.businessId = parseInt(businessBasic.id, 10);
                     }
+                    return item;
                 });
     
                 images = images.map((item): any => {
                     if (businessBasic.id) {
                         item.businessId = parseInt(businessBasic.id, 10);
                     }
+                    return item;
                 });
             }
             const businessContact = await BusinessContactModel.query(trx).insert(contact).first();
-            const businessCategories = await BusinessContactModel.query(trx).insertGraph(categories).first();
-            const businessImages = await BusinessContactModel.query(trx).insertGraph(images).first();
+            const businessCategories = await BusinessCategoriesModel.query(trx).insertGraph(categories);
+            const businessImages = await BusinessImagesModel.query(trx).insertGraph(images);
     
             const result = {
                 businessBasic,
