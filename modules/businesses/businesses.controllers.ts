@@ -18,13 +18,16 @@ const getBusinessesController
         /**
          * @param id are expected to be a member of the @param req
          */
-        const { id } = req.query;
+        const { id, term } = req.query;
 
         const data: BusinessesModel = new BusinessesModel;
 
         data.id = id;
+        data.name = term;
 
-        const businesses = await getBusinessesData(id)
+        let businesses;
+
+        businesses = await getBusinessesData(id, term)
             .catch((): void => {
                 throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
             });

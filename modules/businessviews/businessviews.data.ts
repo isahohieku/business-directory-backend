@@ -28,7 +28,8 @@ const addBusinessViewsData = async (businessViews: BusinessViewsModel): Promise<
  * @method updateBusinessViewsData is a method to update a businessViews
  */
 const updateBusinessViewsData = async (data: BusinessViewsModel): Promise<BusinessViewsModel | undefined> => {
-    let result = await BusinessViewsModel.query().increment('views', 1).where({ id: data.id }).first();
+    console.log(data);
+    let result = await BusinessViewsModel.query().where({ businessId: data.businessId }).increment('views', 1).first();
     return result;
 };
 

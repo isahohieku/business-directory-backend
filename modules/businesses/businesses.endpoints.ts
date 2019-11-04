@@ -13,7 +13,20 @@ const businessesEndpoints: Route[] = [
         /**
          * @method verifyToken to verify user token is valid and available
          */
-        middlewares: [verifyToken],
+        middlewares: [],
+        /**
+         * @method getBusinesses is a member of the @class Businesses.Service to get businesses
+         */
+        service: [BusinessesService.getBusinesses]
+    },
+
+    {
+        path: `${BUSINESSES_URL}/search`,
+        method: HttpMethod.GET,
+        /**
+         * @method verifyToken to verify user token is valid and available
+         */
+        middlewares: [],
         /**
          * @method getBusinesses is a member of the @class Businesses.Service to get businesses
          */
@@ -27,7 +40,7 @@ const businessesEndpoints: Route[] = [
          * @method verifyToken to verify user token is valid and available
          * @method validateBusinesses to validate businesses data in the body
          */
-        middlewares: [verifyToken],
+        middlewares: [],
         /**
          * @method addBusinesses is a member of the @class businesses.Service to add contact
          */

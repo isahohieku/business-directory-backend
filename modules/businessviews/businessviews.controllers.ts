@@ -69,11 +69,11 @@ const updateBusinessViewsController = async (req: Request): Promise<BusinessView
     /**
      * @param id is expected to be a member of the @param req.body
      */
-    const { id } = req.body;
+    const { businessId } = req.body;
 
     const data: BusinessViewsModel = new BusinessViewsModel;
 
-    data.id = id;
+    data.businessId = parseInt(businessId, 10);
 
     const businessViews = await updateBusinessViewsData(data)
         .catch((): void => {

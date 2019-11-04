@@ -40,7 +40,7 @@ const businessViewsEndpoints: Route[] = [
         /**
          * @method verifyToken to verify user token is valid and available
          */
-        middlewares: [verifyToken, validateBusinessViewsUpdate],
+        middlewares: [],
         /**
          * @method updateBusinessViews is a member of the @class businessViews.Service to update contact
          */

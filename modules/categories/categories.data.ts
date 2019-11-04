@@ -26,7 +26,7 @@ const getCategoriesData =
     };
 
 /**
- * @param id is the id of categories passed into the @method getCategoriesData
+ * @param name is the id of categories passed into the @method getCategoriesData
  * @method getCategoriesData is a method to get a categories or categoriess
  */
 const getCategoriesDataByValue =

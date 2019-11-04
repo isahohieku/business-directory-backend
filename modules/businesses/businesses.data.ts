@@ -14,52 +14,93 @@ const knex = Knex(knexConfig as Knex.Config);
  * @param id is the id of businesses passed into the @method getBusinessesData
  * @method getBusinessesData is a method to get a businesses or businessess
  */
-const getBusinessesData = async (id: string): Promise<BusinessesModel | BusinessesModel[] | undefined | any[]> => {
-    if (!id) {
-        const businessMetas = await BusinessesModel.query()
-            .join('businessContact', 'business.id', '=', 'businessContact.businessId')
-            .join('businessViews', 'business.id', '=', 'businessViews.businessId')
-            .select(
-                // Business
-                'business.id',
-                'business.name',
-                'business.description',
-                'business.createdAt',
-                // Contact
-                'businessContact.website',
-                'businessContact.email',
-                'businessContact.phone',
-                'businessContact.location',
-                // Views
-                'businessViews.views'
-            );
-        return businessMetas;
+const getBusinessesData =
+    async (id: string, name: string): Promise<BusinessesModel | BusinessesModel[] | undefined | any[]> => {
+        console.log(name);
+        if (!id && !name) {
+            let businessMetas;
+            await BusinessesModel.query()
+                .join('businessContact', 'business.id', '=', 'businessContact.businessId')
+                .join('businessViews', 'business.id', '=', 'businessViews.businessId')
+                .select(
+                    // Business
+                    'business.id',
+                    'business.name',
+                    'business.description',
+                    'business.createdAt',
+                    // Contact
+                    'businessContact.website',
+                    'businessContact.email',
+                    'businessContact.phone',
+                    'businessContact.location',
+                    // Views
+                    'businessViews.views'
+                )
+                .then(async (res: any): Promise<any> => {
 
-    }
+                    const images = await BusinessImagesModel.query().select('imageUrl', 'businessId', 'id');
 
-    const businessMeta = await BusinessesModel.query().where({ id }).first();
-    const businessContact = await BusinessContactModel.query().where({ businessId: id }).first();
-    const businessCategories = await BusinessCategoriesModel.query().where({ businessId: id });
-    const businessImages = await BusinessImagesModel.query().where({ businessId: id });
+                    businessMetas = res.map((item: any): any => {
+                        const resImg = images.filter((item2: any) => item2.businessId === item.id);
+                        item.images = resImg;
+                        return item;
+                    });
+                });
+            return businessMetas;
+        }
 
-    const categories: Promise<CategoriesModel | undefined>[] =
-        businessCategories.map(async (item): Promise<CategoriesModel | undefined> => {
-            const res = await CategoriesModel.query().where({ id: item.categoryId }).first();
-            if (res) {
-                return res;
+        if (name) {
+            const businessMetas = await BusinessesModel.query();
+
+            let result: BusinessesModel[] = [];
+            if (businessMetas.length) {
+                result = businessMetas.filter((item: any): any => item.name.toLowerCase().includes(name.toLowerCase()));
             }
-        });
+            return result;
+        }
 
-    const result = {
-        ...businessMeta,
-        ...businessContact,
-        ...categories,
-        ...businessImages
+        const businessMeta = await BusinessesModel.query().where({ id }).first();
+        const businessContact = await BusinessContactModel.query().where({ businessId: id }).first();
+        const businessCategories = await BusinessCategoriesModel.query().where({ businessId: id });
+        const businessImages = await BusinessImagesModel.query().where({ businessId: id });
+        const businessViews = await BusinessViewsModel.query().where({ businessId: id }).first().select('views');
+
+        const categories: Promise<CategoriesModel | undefined>[] =
+            businessCategories.map(async (item): Promise<CategoriesModel | undefined> => {
+                const res = await CategoriesModel.query().where({ id: item.categoryId }).first();
+                if (res) {
+                    return res;
+                }
+            });
+
+        const result = {
+            ...businessMeta,
+            ...businessContact,
+            ...categories,
+            images: businessImages,
+            ...businessViews
+        };
+
+        // console.log(result);
+        return result;
     };
 
-    // console.log(result);
-    return result;
-};
+/**
+ * @param name is the id of businesses passed into the @method getBusinessesData
+ * @method getBusinessesData is a method to get a businesses or businessess
+ */
+const getBusinessDataByValue =
+    async (name: string): Promise<BusinessesModel | BusinessesModel[] | undefined> => {
+        if (name) {
+            const result1 = await BusinessesModel.query();
+
+            let result: BusinessesModel[] = [];
+            if (result1.length) {
+                result = result1.filter((item): boolean => item.name.toLowerCase().includes(name.toLowerCase()));
+            }
+            return result;
+        }
+    };
 
 /**
  * @param businesses is the id of businesses passed into the @method addBusinessesData
@@ -148,6 +189,7 @@ const removeBusinessesData = async (id: string): Promise<number | undefined> => 
 
 export {
     getBusinessesData,
+    getBusinessDataByValue,
     addBusinessesData,
     updateBusinessesData,
     removeBusinessesData
