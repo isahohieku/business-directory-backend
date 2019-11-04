@@ -12,7 +12,7 @@
 		"make-js": "knex migrate:make --env development --knexfile ./db/knexfile.js",
 		"make": "knex --env development --knexfile ./db/knexfile.ts -x ts migrate:make",
 		"migrate": "npm run prestart && knex migrate:latest --env development --knexfile ./db/knexfile.ts",
-		"migrate-js": "npm run prestart && knex migrate:latest --env production --knexfile ./db/knexfile.js",
+		"migrate-js": "npm run prestart && knex migrate:latest --env development --knexfile ./db/knexfile.js",
 		"migrate-test-js": "npm run prestart && knex migrate:latest --env test --knexfile ./db/knexfile.js",
 		"rollback": "npm run prestart && knex migrate:rollback --env development --knexfile ./db/knexfile.ts",
 		"rollback-js": "npm run prestart && knex migrate:rollback --env development --knexfile ./db/knexfile.js",
