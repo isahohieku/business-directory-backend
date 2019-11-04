@@ -1,4 +1,5 @@
 import CategoriesModel from '../../db/models/categories.model';
+import BusinessCategoriesModel from '../../db/models/businesscategories.model';
 
 /**
  * @param id is the id of categories passed into the @method getCategoriesData
@@ -7,7 +8,16 @@ import CategoriesModel from '../../db/models/categories.model';
 const getCategoriesData =
     async (id: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
         if (!id) {
-            const result = await CategoriesModel.query();
+            let result = await CategoriesModel.query();
+            await BusinessCategoriesModel.query()
+                .then((allCategories): any => {
+                    result = result.map((item): any => {
+                        const views = allCategories.filter((item2): any => item.id === item2.categoryId).length;
+                        item.views = views;
+                        return item;
+                    });
+                    return result;
+                });
             return result;
         }
 
@@ -30,9 +40,6 @@ const getCategoriesDataByValue =
             }
             return result;
         }
-
-        const result = await CategoriesModel.query();
-        return result;
     };
 
 /**
