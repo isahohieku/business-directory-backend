@@ -12,8 +12,8 @@ const getCategoriesData =
             await BusinessCategoriesModel.query()
                 .then((allCategories): any => {
                     result = result.map((item): any => {
-                        const views = allCategories.filter((item2): any => item.id === item2.categoryId).length;
-                        item.views = views;
+                        const businesses = allCategories.filter((item2): any => item.id === item2.categoryId).length;
+                        item.businesses = businesses;
                         return item;
                     });
                     return result;

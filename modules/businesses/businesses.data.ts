@@ -57,7 +57,7 @@ const getBusinessesData = async (id: string): Promise<BusinessesModel | Business
         ...businessImages
     };
 
-    console.log(result);
+    // console.log(result);
     return result;
 };
 
