@@ -36,7 +36,11 @@ const getCategoriesDataByValue =
 
             let result: CategoriesModel[] = [];
             if (result1.length) {
-                result = result1.filter((item): boolean => item.name.toLowerCase().includes(name.toLowerCase()));
+                result = result1.filter((item): any => {
+                    if (item.name) {
+                        return item.name.toLowerCase().includes(name.toLowerCase());
+                    }
+                });
             }
             return result;
         }

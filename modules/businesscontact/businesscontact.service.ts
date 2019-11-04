@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, Response, NextFunction } from 'express';
 import {
     getBusinessContactController,
     addBusinessContactController,
@@ -13,7 +13,7 @@ import { ErrorService } from '../../services';
 class BusinessContactService {
     public constructor() { }
 
-    public async getBusinessContact(req: Request, res: Response): Promise<void> {
+    public async getBusinessContact(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             let data;
             await getBusinessContactController(req)
@@ -23,11 +23,11 @@ class BusinessContactService {
 
             sendSuccess(res, 'businessContact.controllers.ts', data, messages.NO_MESSAGE);
         } catch (e) {
-            ErrorService.errorHandler(e, req, res);
+            ErrorService.errorHandler(e, req, res, next);
         }
     }
 
-    public async addBusinessContact(req: Request, res: Response): Promise<void> {
+    public async addBusinessContact(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             let data;
             await addBusinessContactController(req)
@@ -37,11 +37,11 @@ class BusinessContactService {
 
             sendSuccess(res, 'businessContact.controller.ts', data, messages.CONTACT_ADDED_SUCCESSFULLY);
         } catch (e) {
-            ErrorService.errorHandler(e, req, res);
+            ErrorService.errorHandler(e, req, res, next);
         }
     }
 
-    public async updateBusinessContact(req: Request, res: Response): Promise<void> {
+    public async updateBusinessContact(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             let data;
             await updateBusinessContactController(req)
@@ -51,11 +51,11 @@ class BusinessContactService {
 
             sendSuccess(res, 'businessContact.controller.ts', data, messages.CONTACT_UPDATED_SUCCESSFULLY);
         } catch (e) {
-            ErrorService.errorHandler(e, req, res);
+            ErrorService.errorHandler(e, req, res, next);
         }
     }
 
-    public async removeBusinessContact(req: Request, res: Response): Promise<void> {
+    public async removeBusinessContact(req: Request, res: Response, next: NextFunction): Promise<void> {
         try {
             let data;
             await removeBusinessContactController(req)
@@ -65,7 +65,7 @@ class BusinessContactService {
 
             sendSuccess(res, 'businessContact.controller.ts', data, messages.CONTACT_REMOVED_SUCCESSFULLY);
         } catch (e) {
-            ErrorService.errorHandler(e, req, res);
+            ErrorService.errorHandler(e, req, res, next);
         }
     }
 }
