@@ -9,8 +9,8 @@ Model.knex(knex);
 class BusinessViewsModel extends Model {
 
     public id?: string;
-    public businessId?: string;
-    public views?: string;
+    public businessId?: number;
+    public views?: number;
     public createdAt?: string;
     public updatedAt?: string;
 

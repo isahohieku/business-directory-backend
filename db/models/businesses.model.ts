@@ -11,6 +11,7 @@ class BusinessesModel extends Model {
     public id?: string;
     public description?: string;
     public name?: string;
+    public website?: string;
     public createdAt?: string;
     public updatedAt?: string;
 
@@ -58,6 +59,7 @@ class BusinessesModel extends Model {
                 parentId: {type: ['integer', 'null']},
                 description: {type: 'string', minLength: 0, maxLength: 255},
                 name: {type: 'string', minLength: 1, maxLength: 255},
+                website: {type: 'string', minLength: 1, maxLength: 255},
                 createdAt: {type: 'string'},
                 updatedAt: {type: 'string'}
             }

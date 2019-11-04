@@ -54,7 +54,7 @@ class BusinessContactModel extends Model {
     public static get jsonSchema (): {} {
         return {
             type: 'object',
-            required: ['businessId', 'website', 'phone', 'location'],
+            required: ['businessId', 'website', 'phone', 'location', 'email'],
 
             properties: {
                 id: {type: 'integer'},
