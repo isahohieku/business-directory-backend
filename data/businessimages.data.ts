@@ -1,4 +1,4 @@
-import BusinessImagesModel from '../models/businessImages.model';
+import BusinessImagesModel from '../models/businessimages.model';
 
 /**
  * @param id is the id of businessImages passed into the @method getBusinessImagesData

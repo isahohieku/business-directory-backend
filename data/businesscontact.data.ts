@@ -1,4 +1,4 @@
-import BusinessContactModel from '../models/businessContact.model';
+import BusinessContactModel from '../models/businesscontact.model';
 
 /**
  * @param id is the id of businessContact passed into the @method getBusinessContactData

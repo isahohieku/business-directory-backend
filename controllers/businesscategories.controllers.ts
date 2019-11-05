@@ -4,7 +4,7 @@ import {
     getBusinessCategoriesData,
     addBusinessCategoriesData,
     removeBusinessCategoriesData, updateBusinessCategoriesData
-} from '../data/businessCategories.data';
+} from '../data/businesscategories.data';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
 import BusinessCategoriesModel from '../models/businessCategories.model';

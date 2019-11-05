@@ -4,7 +4,7 @@ import { validateBusinessViews, validateBusinessViewsUpdate } from '../validator
 import { verifyToken } from '../validators/auth.validators';
 import BusinessViewsService from '../services/businessviews.service';
 
-const BUSINESSVIEWS_URL = '/api/businessViews';
+const BUSINESSVIEWS_URL = '/api/businessviews';
 
 const businessViewsEndpoints: Route[] = [
     {

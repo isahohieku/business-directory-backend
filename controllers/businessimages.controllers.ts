@@ -4,7 +4,7 @@ import { getBusinessImagesData,
     addBusinessImagesData, removeBusinessImagesData, updateBusinessImagesData } from '../data/businessimages.data';
 import { CustomError } from '../lib/custom.error';
 import {codes} from '../constants/api_response_codes.constants';
-import BusinessImagesModel from '../models/businessImages.model';
+import BusinessImagesModel from '../models/businessimages.model';
 
 /**
  * @method getBusinessImages to get a businessImages by a user

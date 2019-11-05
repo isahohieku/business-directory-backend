@@ -1,11 +1,11 @@
 import { Route } from '../lib/endpoint.type';
 import { HttpMethod } from '../lib/http.methods';
 import { validateBusinessCategories, 
-    validateBusinessCategoriesUpdate } from '../validators/businessCategories.validators';
+    validateBusinessCategoriesUpdate } from '../validators/businesscategories.validators';
 import { verifyToken } from '../validators/auth.validators';
 import BusinessCategoriesService from '../services/businesscategories.service';
 
-const BUSINESSCATEGORIES_URL = '/api/businessCategories';
+const BUSINESSCATEGORIES_URL = '/api/businesscategories';
 
 const businessCategoriesEndpoints: Route[] = [
     {

@@ -5,7 +5,7 @@ import { validateBusinessContact,
 import { verifyToken } from '../validators/auth.validators';
 import BusinessContactService from '../services/businesscontact.service';
 
-const BUSINESSCONTACT_URL = '/api/businessContact';
+const BUSINESSCONTACT_URL = '/api/businesscontact';
 
 const businessContactEndpoints: Route[] = [
     {

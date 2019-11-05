@@ -3,9 +3,9 @@ import { HttpMethod } from '../lib/http.methods';
 import { validateBusinessImages, 
     validateBusinessImagesUpdate } from '../validators/businessimages.validators';
 import { verifyToken } from '../validators/auth.validators';
-import BusinessImagesService from '../services/businessImages.service';
+import BusinessImagesService from '../services/businessimages.service';
 
-const BUSINESSIMAGES_URL = '/api/businessImages';
+const BUSINESSIMAGES_URL = '/api/businessimages';
 
 const businessImagesEndpoints: Route[] = [
     {
