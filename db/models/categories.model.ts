@@ -8,7 +8,7 @@ Model.knex(knex);
 
 class CategoriesModel extends Model {
 
-    public id?: string;
+    public id?: number;
     public name?: string;
     public businesses?: number;
     public createdAt?: string;

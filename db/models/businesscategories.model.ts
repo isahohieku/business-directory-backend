@@ -8,7 +8,7 @@ Model.knex(knex);
 
 class BusinessCategoriesModel extends Model {
 
-    public id?: string;
+    public id?: number;
     public businessId?: number;
     public categoryId?: number;
     public createdAt?: string;
