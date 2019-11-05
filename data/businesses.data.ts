@@ -16,7 +16,6 @@ const knex = Knex(knexConfig as Knex.Config);
  */
 const getBusinessesData =
     async (id: string, name: string): Promise<BusinessesModel | BusinessesModel[] | undefined | any[]> => {
-        console.log(name);
         if (!id && !name) {
             let businessMetas;
             await BusinessesModel.query()
