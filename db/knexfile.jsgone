@@ -25,7 +25,6 @@ const _Config = {
             tableName: 'knex_migrations',
             directory: 'migrations'
         },
-        acquireConnectionTimeout: 3000,
         pool: {
             min: 1,
             max: 1

@@ -22,7 +22,7 @@
 		"seed:make-js": "npm run prestart && knex seed:make --env development --knexfile ./db/knexfile.js",
 		"waste": "node -e \"require('fs').rename('db/knexfile.js', 'db/knexfile.jsgone', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\"",
 		"revamp": "node -e \"require('fs').rename('db/knexfile.jsgone', 'db/knexfile.js', function(err) { if (err) console.log(err); console.log('File successfully renamed!') })\"",
-		"start": "npm run revamp && npm run migrate-js && npm run seed:run-js && npm run waste && node ./build/app/app.js",
+		"start": "node ./build/app/app.js",
 		"build": "tsc",
 		"prod": "build && node ./build/app/app.js",
 		"t": "node ./generators/index.js",
