@@ -4,7 +4,7 @@ import { getBusinessContactData,
     addBusinessContactData, removeBusinessContactData, updateBusinessContactData } from '../data/businessContact.data';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
-import BusinessContactModel from '../db/models/businessContact.model';
+import BusinessContactModel from '../models/businessContact.model';
 
 /**
  * @method getBusinessContact to get a businessContact by a user

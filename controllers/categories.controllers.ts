@@ -6,7 +6,7 @@ import {
 } from '../data/categories.data';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
-import CategoriesModel from '../db/models/categories.model';
+import CategoriesModel from '../models/categories.model';
 
 /**
  * @method getCategories to get a categories by a user

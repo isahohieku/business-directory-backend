@@ -6,7 +6,7 @@ import {
 } from '../data/businessviews.data';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
-import BusinessViewsModel from '../db/models/businessViews.model';
+import BusinessViewsModel from '../models/businessViews.model';
 
 /**
  * @method getBusinessViews to get a businessViews by a user

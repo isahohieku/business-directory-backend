@@ -1,5 +1,5 @@
-import CategoriesModel from '../db/models/categories.model';
-import BusinessCategoriesModel from '../db/models/businesscategories.model';
+import CategoriesModel from '../models/categories.model';
+import BusinessCategoriesModel from '../models/businesscategories.model';
 
 /**
  * @param id is the id of categories passed into the @method getCategoriesData

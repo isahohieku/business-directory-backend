@@ -3,7 +3,7 @@ import { messages } from '../constants/messages.constants';
 import { getUser } from '../data/auth.data';
 import { CustomError } from '../lib/custom.error';
 import {codes} from '../constants/api_response_codes.constants';
-import LoginModel from '../db/models/login.model';
+import LoginModel from '../models/login.model';
 
 /**
  * @method loginUser is a demo method which should be changed (if need be)

@@ -4,11 +4,11 @@ import { getBusinessesData,
     addBusinessesData, removeBusinessesData, updateBusinessesData } from '../data/businesses.data';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
-import BusinessesModel from '../db/models/businesses.model';
-import BusinessContactModel from '../db/models/businesscontact.model';
-import BusinessCategoriesModel from '../db/models/businesscategories.model';
-import BusinessImagesModel from '../db/models/businessimages.model';
-import BusinessViewsModel from '../db/models/businessviews.model';
+import BusinessesModel from '../models/businesses.model';
+import BusinessContactModel from '../models/businesscontact.model';
+import BusinessCategoriesModel from '../models/businesscategories.model';
+import BusinessImagesModel from '../models/businessimages.model';
+import BusinessViewsModel from '../models/businessviews.model';
 
 /**
  * @method getBusinesses to get a businesses by a user

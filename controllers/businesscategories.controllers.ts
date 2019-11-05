@@ -7,7 +7,7 @@ import {
 } from '../data/businessCategories.data';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
-import BusinessCategoriesModel from '../db/models/businessCategories.model';
+import BusinessCategoriesModel from '../models/businessCategories.model';
 
 /**
  * @method getBusinessCategories to get a businessCategories by a user

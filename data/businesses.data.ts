@@ -1,12 +1,12 @@
-import BusinessesModel from '../db/models/businesses.model';
+import BusinessesModel from '../models/businesses.model';
 import { transaction, Transaction } from 'objection';
 import Knex from 'knex';
 import { knexConfig } from '../db/knexfile';
-import BusinessContactModel from '../db/models/businesscontact.model';
-import BusinessCategoriesModel from '../db/models/businesscategories.model';
-import BusinessImagesModel from '../db/models/businessimages.model';
-import CategoriesModel from '../db/models/categories.model';
-import BusinessViewsModel from '../db/models/businessviews.model';
+import BusinessContactModel from '../models/businesscontact.model';
+import BusinessCategoriesModel from '../models/businesscategories.model';
+import BusinessImagesModel from '../models/businessimages.model';
+import CategoriesModel from '../models/categories.model';
+import BusinessViewsModel from '../models/businessviews.model';
 
 const knex = Knex(knexConfig as Knex.Config);
 

@@ -1,5 +1,5 @@
 import { generateEncryptedPassword } from '../utils/auth.util';
-import LoginModel from '../db/models/login.model';
+import LoginModel from '../models/login.model';
 
 
 /**
