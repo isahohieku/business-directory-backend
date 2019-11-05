@@ -4,7 +4,7 @@ import {
     addBusinessCategoriesController,
     removeBusinessCategoriesController,
     updateBusinessCategoriesController
-} from './businessCategories.controllers';
+} from '../controllers/businessCategories.controllers';
 
 import { sendSuccess } from '../responses/success.response';
 import { messages } from '../constants/messages.constants';
