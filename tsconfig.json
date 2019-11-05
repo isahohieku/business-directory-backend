@@ -1,12 +1,18 @@
 {
     "compilerOptions": {
-      // "baseUrl": ".",
-      // "paths": { "*": [
-      //   "*",
-      //   "modules/*",
-      //   "db/models/*",
-      //   "db/*"
-      //   ] },
+      "baseUrl": ".",
+      "paths": { "*": [
+        "*",
+        "modules/auth/*",
+        "modules/businesscategories/*",
+        "modules/businesscontact/*",
+        "modules/businesses/*",
+        "modules/businessimages/*",
+        "modules/businessviews/*",
+        "modules/categories/*",
+        "db/models/*",
+        "db/*"
+        ] },
       /* Basic Options */
       "target": "es2015",
       /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
