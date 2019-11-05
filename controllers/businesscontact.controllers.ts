@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import { messages } from '../constants/messages.constants';
 import { getBusinessContactData, 
-    addBusinessContactData, removeBusinessContactData, updateBusinessContactData } from '../data/businessContact.data';
+    addBusinessContactData, removeBusinessContactData, updateBusinessContactData } from '../data/businesscontact.data';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
 import BusinessContactModel from '../models/businesscontact.model';
