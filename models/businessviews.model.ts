@@ -1,16 +1,16 @@
 import { Model } from 'objection';
 import moment from 'moment';
 import Knex from 'knex';
-import { knexConfig } from '../../db/knexfile';
+import { knexConfig } from '../db/knexfile';
 
 const knex = Knex(knexConfig as Knex.Config);
 Model.knex(knex);
 
-class BusinessImagesModel extends Model {
+class BusinessViewsModel extends Model {
 
     public id?: string;
     public businessId?: number;
-    public imageUrl?: string;
+    public views?: number;
     public createdAt?: string;
     public updatedAt?: string;
 
@@ -21,7 +21,7 @@ class BusinessImagesModel extends Model {
 
     // Table name is the only required property.
     public static get tableName(): string {
-        return 'businessImages';
+        return 'businessViews';
     }
 
 
@@ -51,13 +51,13 @@ class BusinessImagesModel extends Model {
     public static get jsonSchema (): {} {
         return {
             type: 'object',
-            required: ['businessId', 'imageUrl'],
+            required: ['businessId', 'views'],
 
             properties: {
                 id: {type: 'integer'},
                 parentId: {type: ['integer', 'null']},
                 businessId: {type: 'integer'},
-                imageUrl: {type: 'string', minLength: 1, maxLength: 255},
+                views: {type: 'integer'},
                 createdAt: {type: 'string'},
                 updatedAt: {type: 'string'}
             }
@@ -65,4 +65,4 @@ class BusinessImagesModel extends Model {
     }
 }
 
-export default BusinessImagesModel;
+export default BusinessViewsModel;

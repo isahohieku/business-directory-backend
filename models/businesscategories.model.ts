@@ -1,19 +1,16 @@
 import { Model } from 'objection';
 import moment from 'moment';
 import Knex from 'knex';
-import { knexConfig } from '../../db/knexfile';
+import { knexConfig } from '../db/knexfile';
 
 const knex = Knex(knexConfig as Knex.Config);
 Model.knex(knex);
 
-class BusinessContactModel extends Model {
+class BusinessCategoriesModel extends Model {
 
-    public id?: string;
+    public id?: number;
     public businessId?: number;
-    public website?: string;
-    public phone?: string;
-    public email?: string;
-    public location?: string;
+    public categoryId?: number;
     public createdAt?: string;
     public updatedAt?: string;
 
@@ -24,7 +21,7 @@ class BusinessContactModel extends Model {
 
     // Table name is the only required property.
     public static get tableName(): string {
-        return 'businessContact';
+        return 'businessCategories';
     }
 
 
@@ -54,16 +51,13 @@ class BusinessContactModel extends Model {
     public static get jsonSchema (): {} {
         return {
             type: 'object',
-            required: ['businessId', 'website', 'phone', 'location', 'email'],
+            required: ['businessId', 'categoryId'],
 
             properties: {
                 id: {type: 'integer'},
                 parentId: {type: ['integer', 'null']},
-                businessId: {type: 'integer'},
-                website: {type: 'string', minLength: 1, maxLength: 255},
-                phone: {type: 'string', minLength: 1, maxLength: 255},
-                email: {type: 'string', minLength: 1, maxLength: 255},
-                location: {type: 'string', minLength: 1, maxLength: 255},
+                categoryId: {type: 'number'},
+                businessId: {type: 'number'},
                 createdAt: {type: 'string'},
                 updatedAt: {type: 'string'}
             }
@@ -71,4 +65,4 @@ class BusinessContactModel extends Model {
     }
 }
 
-export default BusinessContactModel;
+export default BusinessCategoriesModel;

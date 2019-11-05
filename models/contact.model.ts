@@ -1,7 +1,7 @@
 import { Model } from 'objection';
 import moment from 'moment';
 import Knex from 'knex';
-import { knexConfig } from '../../db/knexfile';
+import { knexConfig } from '../db/knexfile';
 
 const knex = Knex(knexConfig as Knex.Config);
 Model.knex(knex);

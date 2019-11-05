@@ -7,7 +7,7 @@ import { codes } from '../constants/api_response_codes.constants';
 import { messages } from '../constants/messages.constants';
 
 import { getUser, addUser } from '../data/auth.data';
-import LoginModel from '../db/models/login.model';
+import LoginModel from '../models/login.model';
 import { passwordMatch, generateJWT, pickUserData } from '../utils/auth.util';
 
 class AuthService {

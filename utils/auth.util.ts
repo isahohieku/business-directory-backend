@@ -5,7 +5,7 @@ import bcrypt from 'bcrypt';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
 import { messages } from '../constants/messages.constants';
-import LoginModel from '../db/models/login.model';
+import LoginModel from '../models/login.model';
 import * as _ from 'lodash';
 import { Request, Response } from 'express';
 
