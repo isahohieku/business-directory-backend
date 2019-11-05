@@ -1,7 +1,7 @@
-import authEndpoints from "../modules/auth/auth.endpoints";
-import categoriesEndpoints from "../modules/categories/categories.endpoints";
-import businessesEndpoints from "../modules/businesses/businesses.endpoints";
-import businessViewsEndpoints from "../modules/businessviews/businessviews.endpoints";
+import authEndpoints from "./auth.endpoints";
+import categoriesEndpoints from "./categories.endpoints";
+import businessesEndpoints from "./businesses.endpoints";
+import businessViewsEndpoints from "./businessviews.endpoints";
 
 
 export default [

@@ -2,16 +2,7 @@
     "compilerOptions": {
       "baseUrl": ".",
       "paths": { "*": [
-        "*",
-        "modules/auth/*",
-        "modules/businesscategories/*",
-        "modules/businesscontact/*",
-        "modules/businesses/*",
-        "modules/businessimages/*",
-        "modules/businessviews/*",
-        "modules/categories/*",
-        "db/models/*",
-        "db/*"
+        "*"
         ] },
       /* Basic Options */
       "target": "es2015",
