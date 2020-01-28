@@ -9,8 +9,8 @@ const messages = {
     ERROR_USER_EXIST: 'Email taken',
     ERROR_INVALID_PARAMS: 'Invalid parameter(s)',
     ERROR_WRONG_CREDENTIALS: 'Wrong email or password',
-    ERROR_CONTACT_FOUND: 'Contact not found',
-    ERROR_CONTACT_NOT_UPDATED: 'Contact not found',
+    ERROR_CONTACT_FOUND: 'Business not found',
+    ERROR_CONTACT_NOT_UPDATED: 'Business not found',
     NO_MESSAGE: '',
 
     // Success messages

@@ -2,6 +2,7 @@ import { Model } from 'objection';
 import moment from 'moment';
 import Knex from 'knex';
 import { knexConfig } from '../db/knexfile';
+import CategoriesModel from './categories.model';
 
 const knex = Knex(knexConfig as Knex.Config);
 Model.knex(knex);
@@ -29,8 +30,6 @@ class BusinessCategoriesModel extends Model {
     public static get idColumn(): string {
         return 'id';
     }
-
-
 
     public $beforeInsert(): void {
         this.createdAt = moment().toISOString(true);
@@ -60,6 +59,20 @@ class BusinessCategoriesModel extends Model {
                 businessId: {type: 'number'},
                 createdAt: {type: 'string'},
                 updatedAt: {type: 'string'}
+            }
+        };
+    }
+
+    public static get relationMappings(): any {
+        return {
+            views: {
+                relation: Model.HasOneRelation,
+
+                modelClass: CategoriesModel,
+                join: {
+                    from: 'businessCategories.id',
+                    to: 'categories.id'
+                }
             }
         };
     }

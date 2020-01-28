@@ -30,7 +30,13 @@ class CategoriesModel extends Model {
         return 'id';
     }
 
-
+    public static get modifiers(): any {
+        return {
+            selectCategories(builder): any {
+                builder.select('name');
+            }
+        };
+    }
 
     public $beforeInsert(): void {
         this.createdAt = moment().toISOString(true);

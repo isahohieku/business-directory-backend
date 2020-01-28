@@ -27,7 +27,7 @@ const logger = (mod: string, message: string, type?: string): void => {
         log.info(message, []);
     }
 
-    const debugs = debug(`contact:${mod}`);
+    const debugs = debug(`business-directory:${mod}`);
 
     debugs(message);
 

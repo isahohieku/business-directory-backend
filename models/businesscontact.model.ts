@@ -33,7 +33,13 @@ class BusinessContactModel extends Model {
         return 'id';
     }
 
-
+    public static get modifiers(): any {
+        return {
+            selectSome(builder): any {
+                builder.select('website', 'email', 'phone', 'location');
+            }
+        };
+    }
 
     public $beforeInsert(): void {
         this.createdAt = moment().toISOString(true);

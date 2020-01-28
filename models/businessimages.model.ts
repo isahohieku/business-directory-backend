@@ -31,6 +31,13 @@ class BusinessImagesModel extends Model {
     }
 
 
+    public static get modifiers(): any {
+        return {
+            selectImageUrl(builder): any {
+                builder.select('imageUrl');
+            }
+        };
+    }
 
     public $beforeInsert(): void {
         this.createdAt = moment().toISOString(true);

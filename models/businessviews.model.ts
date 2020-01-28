@@ -2,6 +2,7 @@ import { Model } from 'objection';
 import moment from 'moment';
 import Knex from 'knex';
 import { knexConfig } from '../db/knexfile';
+import Businesses from './businesses.model';
 
 const knex = Knex(knexConfig as Knex.Config);
 Model.knex(knex);
@@ -30,7 +31,13 @@ class BusinessViewsModel extends Model {
         return 'id';
     }
 
-
+    public static get modifiers(): any {
+        return {
+            selectViews(builder): any {
+                builder.select('views');
+            }
+        };
+    }
 
     public $beforeInsert(): void {
         this.createdAt = moment().toISOString(true);
@@ -48,18 +55,18 @@ class BusinessViewsModel extends Model {
     // See http://json-schema.org/ for more info.
 
     /** An example of the Objection jsonSchema */
-    public static get jsonSchema (): {} {
+    public static get jsonSchema(): {} {
         return {
             type: 'object',
             required: ['businessId', 'views'],
 
             properties: {
-                id: {type: 'integer'},
-                parentId: {type: ['integer', 'null']},
-                businessId: {type: 'integer'},
-                views: {type: 'integer'},
-                createdAt: {type: 'string'},
-                updatedAt: {type: 'string'}
+                id: { type: 'integer' },
+                parentId: { type: ['integer', 'null'] },
+                businessId: { type: 'integer' },
+                views: { type: 'integer' },
+                createdAt: { type: 'string' },
+                updatedAt: { type: 'string' }
             }
         };
     }

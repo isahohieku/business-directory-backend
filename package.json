@@ -31,8 +31,8 @@
 		"model": "npm run t g model",
 		"module": "npm run t g module",
 		"tests": "npm run t g test",
-		"dev": "set DEBUG=contact* & npm run prestart && ts-node-dev --respawn --transpileOnly ./app/app.ts",
-		"dev:mac": "npm run prestart && DEBUG=contact* ts-node-dev --respawn --transpileOnly ./app/app.ts"
+		"dev": "set DEBUG=business-directory* & npm run prestart && ts-node-dev --respawn --transpileOnly ./app/app.ts",
+		"dev:mac": "npm run prestart && DEBUG=business-directory* ts-node-dev --respawn --transpileOnly ./app/app.ts"
 	},
 	"author": "Isah Ohieku",
 	"license": "ISC",
@@ -84,11 +84,11 @@
 		"helmet": "3.15.1",
 		"joi": "^13.7.0",
 		"jsonwebtoken": "^8.4.0",
-		"knex": "^0.19.5",
+		"knex": "^0.20.8",
 		"lodash": "^4.17.11",
 		"mock-knex": "^0.4.6",
 		"moment": "^2.22.2",
-		"objection": "^1.6.9",
+		"objection": "^2.1.2",
 		"pg": "^7.11.0",
 		"uuid": "^3.3.2",
 		"winston": "^3.2.1"

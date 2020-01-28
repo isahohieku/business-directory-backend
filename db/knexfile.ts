@@ -14,7 +14,7 @@ const development = {
         user: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
         port: process.env.DB_PORT,
-        ssl: true
+        ssl: false
     },
     migrations: {
         tableName: 'knex_migrations',

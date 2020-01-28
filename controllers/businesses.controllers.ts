@@ -28,8 +28,9 @@ const getBusinessesController
 
         let businesses;
 
-        businesses = await getBusinessesData(id, term)
-            .catch((): void => {
+        businesses = await getBusinessesData(req.query)
+            .catch((e): void => {
+                console.log(e);
                 throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
             });
 
