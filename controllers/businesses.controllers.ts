@@ -1,7 +1,9 @@
 import { Request } from 'express';
 import { messages } from '../constants/messages.constants';
-import { getBusinessesData, 
-    addBusinessesData, removeBusinessesData, updateBusinessesData } from '../data/businesses.data';
+import {
+    getBusinessesData, getRecentBusinessesData,
+    addBusinessesData, removeBusinessesData, updateBusinessesData
+} from '../data/businesses.data';
 import { CustomError } from '../lib/custom.error';
 import { codes } from '../constants/api_response_codes.constants';
 import BusinessesModel from '../models/businesses.model';
@@ -16,19 +18,30 @@ import BusinessViewsModel from '../models/businessviews.model';
 const getBusinessesController
     = async (req: Request): Promise<BusinessesModel | BusinessesModel[] | undefined | void> => {
 
-        /**
-         * @param id are expected to be a member of the @param req
-         */
-        const { id, term } = req.query;
-
-        const data: BusinessesModel = new BusinessesModel;
-
-        data.id = id;
-        data.name = term;
-
         let businesses;
 
         businesses = await getBusinessesData(req.query)
+            .catch((e): void => {
+                console.log(e);
+                throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
+            });
+
+        if (!businesses) {
+            throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.ERROR_CONTACT_FOUND, 404);
+        }
+
+        return businesses;
+    };
+
+/**
+* @method getRecentBusinesses to get a businesses by a user
+*/
+const getRecentBusinessesController
+    = async (req: Request): Promise<BusinessesModel | BusinessesModel[] | undefined | void> => {
+
+        let businesses;
+
+        businesses = await getRecentBusinessesData()
             .catch((e): void => {
                 console.log(e);
                 throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
@@ -157,6 +170,7 @@ const removeBusinessesController = async (req: Request): Promise<number | undefi
 
 export {
     getBusinessesController,
+    getRecentBusinessesController,
     addBusinessesController,
     updateBusinessesController,
     removeBusinessesController

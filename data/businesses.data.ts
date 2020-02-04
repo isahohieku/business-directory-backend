@@ -19,13 +19,13 @@ const getBusinessesData =
         /**
          * @param id are expected to be a member of the @param req
          */
-        const { id, term } = queries;
+        const { id, term, sort } = queries;
 
         const data: BusinessesModel = new BusinessesModel;
 
         data.id = id;
         data.name = term;
-        if (!id && !term) {
+        if (!id && !term && !sort) {
             let businessMetas =
                 await BusinessesModel.query()
                     .withGraphFetched
@@ -44,11 +44,47 @@ const getBusinessesData =
             return result;
         }
 
+        if (sort === 'recent') {
+            let result =
+                await BusinessesModel.query()
+                    .withGraphFetched
+                    ('[images(selectImageUrl), views(selectViews), categories(selectCategoriesForMost)]')
+                    .orderBy('createdAt', 'DESC')
+                    .limit(4);
+            return result;
+        }
+
+        if (sort === 'views') {
+            console.log('yes');
+            let result =
+                await BusinessesModel.query()
+                    .withGraphFetched
+                    ('[images(selectImageUrl), views(orderByViews, selectViews), categories(selectCategoriesForMost)]')
+                    .limit(4);
+            return result;
+        }
+
         let result =
             await BusinessesModel.query().where('id', id)
                 .withGraphFetched
                 ('[images(selectImageUrl), views(selectViews), contact(selectSome), categories(selectCategories)]')
                 .first();
+        return result;
+    };
+
+/**
+* @param id is the id of businesses passed into the @method getBusinessesData
+* @method getBusinessesData is a method to get a businesses or businessess
+*/
+const getRecentBusinessesData =
+    async (): Promise<BusinessesModel | BusinessesModel[] | undefined | any[]> => {
+
+        let result =
+            await BusinessesModel.query()
+                .withGraphFetched
+                ('[images(selectImageUrl), views(selectViews), categories(selectCategoriesForMost)]')
+                .orderBy('createdAt', 'DESC')
+                .limit(4);
         return result;
     };
 
@@ -161,6 +197,7 @@ const removeBusinessesData = async (id: string): Promise<number | undefined> => 
 
 export {
     getBusinessesData,
+    getRecentBusinessesData,
     getBusinessDataByValue,
     addBusinessesData,
     updateBusinessesData,

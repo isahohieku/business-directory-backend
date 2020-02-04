@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import {
     getBusinessesController,
+    getRecentBusinessesController,
     addBusinessesController,
     removeBusinessesController,
     updateBusinessesController
@@ -17,6 +18,20 @@ class BusinessesService {
         try {
             let data;
             await getBusinessesController(req)
+                .then((res): void => {
+                    data = res;
+                });
+
+            sendSuccess(res, 'businesses.controllers.ts', data, messages.NO_MESSAGE);
+        } catch (e) {
+            ErrorService.errorHandler(e, req, res, next);
+        }
+    }
+
+    public async getRecentBusinesses(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            let data;
+            await getRecentBusinessesController(req)
                 .then((res): void => {
                     data = res;
                 });

@@ -34,6 +34,10 @@ class CategoriesModel extends Model {
         return {
             selectCategories(builder): any {
                 builder.select('name');
+            },
+
+            selectCategoriesForMost(builder): any {
+                builder.limit(3);
             }
         };
     }

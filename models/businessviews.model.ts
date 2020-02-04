@@ -19,7 +19,6 @@ class BusinessViewsModel extends Model {
         super();
     }
 
-
     // Table name is the only required property.
     public static get tableName(): string {
         return 'businessViews';
@@ -35,6 +34,9 @@ class BusinessViewsModel extends Model {
         return {
             selectViews(builder): any {
                 builder.select('views');
+            },
+            orderByViews(builder: Knex): any {
+                builder.orderBy('views', 'desc');
             }
         };
     }
