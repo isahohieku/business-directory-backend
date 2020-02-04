@@ -55,7 +55,6 @@ const getBusinessesData =
         }
 
         if (sort === 'views') {
-            console.log('yes');
             let result =
                 await BusinessesModel.query()
                     .withGraphFetched

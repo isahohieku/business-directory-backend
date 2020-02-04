@@ -9,15 +9,7 @@ const getCategoriesData =
     async (id: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
         if (!id) {
             let result = await CategoriesModel.query();
-            await BusinessCategoriesModel.query()
-                .then((allCategories): any => {
-                    result = result.map((item): any => {
-                        const businesses = allCategories.filter((item2): any => item.id === item2.categoryId).length;
-                        item.businesses = businesses;
-                        return item;
-                    });
-                    return result;
-                });
+            console.log(result);
             return result;
         }
 
@@ -31,19 +23,12 @@ const getCategoriesData =
  */
 const getCategoriesDataByValue =
     async (name: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
+        let result = await CategoriesModel.query();
         if (name) {
-            const result1 = await CategoriesModel.query();
-
-            let result: CategoriesModel[] = [];
-            if (result1.length) {
-                result = result1.filter((item): any => {
-                    if (item.name) {
-                        return item.name.toLowerCase().includes(name.toLowerCase());
-                    }
-                });
-            }
+            result = result.filter((item: any): any => item.name.toLowerCase().includes(name.toLowerCase()));
             return result;
         }
+        return result;
     };
 
 /**
