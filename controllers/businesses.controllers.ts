@@ -63,31 +63,32 @@ const addBusinessesController = async (req: Request): Promise<BusinessesModel | 
      * @param name are @param description here is expected to be a member of the @param req
      * Should be changed to the appropriate property expected
      */
-    const { name, description, website, phone, location, email, categories, images } = req.body;
+    const { businessName, businessDescription, businessWebsite, businessPhone, 
+        businessAddress, businessEmail, businessKeywords, businessImages } = req.body;
 
     // Meta Data
     const businessMeta = new BusinessesModel;
 
-    businessMeta.name = name;
-    businessMeta.description = description;
+    businessMeta.name = businessName;
+    businessMeta.description = businessDescription;
 
     // Contact Data
     const businessContact = new BusinessContactModel;
 
-    businessContact.website = website;
-    businessContact.phone = phone;
-    businessContact.location = location;
-    businessContact.email = email;
+    businessContact.website = businessWebsite;
+    businessContact.phone = businessPhone;
+    businessContact.location = businessAddress;
+    businessContact.email = businessEmail;
 
     // Categories
-    const businessCategories: BusinessCategoriesModel[] = categories.map((item: any): any => {
+    const businessCategories: BusinessCategoriesModel[] = businessKeywords.map((item: any): any => {
         const businessCategory = new BusinessCategoriesModel;
-        businessCategory.categoryId = item;
+        businessCategory.categoryId = item.id;
         return businessCategory;
     });
 
     // Images
-    const businessImages: BusinessImagesModel[] = images.map((item: any): any => {
+    const businessImage: BusinessImagesModel[] = businessImages.map((item: any): any => {
         const businessImage = new BusinessImagesModel;
         businessImage.imageUrl = item;
         return businessImage;
@@ -101,7 +102,7 @@ const addBusinessesController = async (req: Request): Promise<BusinessesModel | 
      * @method addBusinessesbusinessMeta shoud also be changed to what is needed (expected)
      */
     const businesses =
-        await addBusinessesData(businessMeta, businessContact, businessCategories, businessImages, businessViews)
+        await addBusinessesData(businessMeta, businessContact, businessCategories, businessImage, businessViews)
             .catch((): void => {
                 throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
             });

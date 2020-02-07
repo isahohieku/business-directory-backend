@@ -44,12 +44,11 @@ const addBusinessViewsController = async (req: Request): Promise<BusinessViewsMo
      * @param businessId and @param views here is expected to be a member of the @param req
      * Should be changed to the appropriate property expected
      */
-    const { businessId, views } = req.body;
+    const { businessId } = req.body;
 
     const data = new BusinessViewsModel;
 
     data.businessId = businessId;
-    data.views = views;
 
     /**
      * @method addBusinessViewsData shoud also be changed to what is needed (expected)

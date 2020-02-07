@@ -121,20 +121,20 @@ const addBusinessesData = async (business: BusinessesModel,
             const businessBasic = await BusinessesModel.query(trx).insert(business).first();
 
             if (businessBasic && businessBasic.id) {
-                contact.businessId = parseInt(businessBasic.id, 10);
-                views.businessId = parseInt(businessBasic.id, 10);
+                contact.businessId = businessBasic.id;
+                views.businessId = businessBasic.id;
                 views.views = 1;
 
                 categories = categories.map((item): any => {
                     if (item.categoryId && businessBasic.id) {
-                        item.businessId = parseInt(businessBasic.id, 10);
+                        item.businessId = businessBasic.id;
                     }
                     return item;
                 });
 
                 images = images.map((item): any => {
                     if (businessBasic.id) {
-                        item.businessId = parseInt(businessBasic.id, 10);
+                        item.businessId = businessBasic.id;
                     }
                     return item;
                 });

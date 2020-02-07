@@ -9,7 +9,6 @@ const getCategoriesData =
     async (id: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
         if (!id) {
             let result = await CategoriesModel.query();
-            console.log(result);
             return result;
         }
 
