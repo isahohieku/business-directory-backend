@@ -139,18 +139,13 @@ const addBusinessesData = async (business: BusinessesModel,
                     return item;
                 });
             }
-            const businessContact = await BusinessContactModel.query(trx).insert(contact).first();
-            const businessViews = await BusinessViewsModel.query(trx).insert(views).first();
-            const businessCategories = await BusinessCategoriesModel.query(trx).insertGraph(categories);
-            const businessImages = await BusinessImagesModel.query(trx).insertGraph(images);
+            
+            await BusinessContactModel.query(trx).insert(contact).first();
+            await BusinessViewsModel.query(trx).insert(views).first();
+            await BusinessCategoriesModel.query(trx).insertGraph(categories);
+            await BusinessImagesModel.query(trx).insertGraph(images);
 
-            const result = {
-                businessBasic,
-                businessContact,
-                businessCategories,
-                businessImages,
-                businessViews
-            };
+            const result = await BusinessesModel.query().findById(businessBasic.id);
 
             return result;
         });
@@ -178,12 +173,13 @@ const updateBusinessesData = async (data: BusinessesModel): Promise<BusinessesMo
 const removeBusinessesData = async (id: string): Promise<number | undefined> => {
     try {
         const res = await transaction(knex, async (trx: Transaction): Promise<any> => {
-            const result = await BusinessesModel.query().delete().where({ id });
 
             await BusinessContactModel.query(trx).delete().where({ businessId: id });
             await BusinessViewsModel.query(trx).delete().where({ businessId: id });
             await BusinessCategoriesModel.query(trx).delete().where({ businessId: id });
             await BusinessImagesModel.query(trx).delete().where({ businessId: id });
+            const result = await BusinessesModel.query(trx).delete().where({ id });
+
 
             return result;
         });
