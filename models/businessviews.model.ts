@@ -3,6 +3,10 @@ import moment from 'moment';
 import Knex from 'knex';
 import { knexConfig } from '../db/knexfile';
 import Businesses from './businesses.model';
+import CategoriesModel from './categories.model';
+import BusinessImagesModel from './businessimages.model';
+import BusinessContactModel from './businesscontact.model';
+import BusinessesModel from './businesses.model';
 
 const knex = Knex(knexConfig as Knex.Config);
 Model.knex(knex);
@@ -69,6 +73,55 @@ class BusinessViewsModel extends Model {
                 views: { type: 'integer' },
                 createdAt: { type: 'string' },
                 updatedAt: { type: 'string' }
+            }
+        };
+    }
+
+    public static get relationMappings(): any {
+        return {
+
+            business: {
+                relation: Model.HasOneRelation,
+
+                modelClass: BusinessesModel,
+                join: {
+                    from: 'businessViews.businessId',
+                    to: 'business.id'
+                }
+            },
+
+            contact: {
+                relation: Model.HasOneRelation,
+
+                modelClass: BusinessContactModel,
+                join: {
+                    from: 'businessViews.businessId',
+                    to: 'businessContact.businessId'
+                }
+            },
+
+            images: {
+                relation: Model.HasManyRelation,
+
+                modelClass: BusinessImagesModel,
+                join: {
+                    from: 'businessViews.businessId',
+                    to: 'businessImages.businessId'
+                }
+            },
+
+            categories: {
+                relation: Model.ManyToManyRelation,
+
+                modelClass: CategoriesModel,
+                join: {
+                    from: 'businessViews.businessId',
+                    through: {
+                        from: 'businessCategories.businessId',
+                        to: 'businessCategories.categoryId'
+                    },
+                    to: 'categories.id'
+                }
             }
         };
     }

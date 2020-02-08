@@ -36,6 +36,14 @@ class BusinessesModel extends Model {
         return 'id';
     }
 
+    public static get modifiers(): any {
+        return {
+            selectSome(builder): any {
+                builder.select('name', 'description');
+            }
+        };
+    }
+
     public $beforeInsert(): void {
         this.createdAt = moment().toISOString(true);
     }

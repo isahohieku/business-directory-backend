@@ -56,10 +56,12 @@ const getBusinessesData =
 
         if (sort === 'views') {
             let result =
-                await BusinessesModel.query()
+                await BusinessViewsModel.query()
                     .withGraphFetched
-                    ('[images(selectImageUrl), views(orderByViews, selectViews), categories(selectCategoriesForMost)]')
+                    ('[business(selectSome), images(selectImageUrl), categories(selectCategoriesForMost)]')
+                    .orderBy('views', 'DESC')
                     .limit(4);
+
             return result;
         }
 
@@ -139,14 +141,18 @@ const addBusinessesData = async (business: BusinessesModel,
                     return item;
                 });
             }
-            
+
             await BusinessContactModel.query(trx).insert(contact).first();
             await BusinessViewsModel.query(trx).insert(views).first();
             await BusinessCategoriesModel.query(trx).insertGraph(categories);
             await BusinessImagesModel.query(trx).insertGraph(images);
 
-            const result = await BusinessesModel.query().findById(businessBasic.id);
-
+            let result =
+                await BusinessesModel.query(trx).where('id', businessBasic.id)
+                    .withGraphFetched
+                    ('[images(selectImageUrl), views(selectViews), contact(selectSome), categories(selectCategories)]')
+                    .first();
+            console.log(result);
             return result;
         });
 
