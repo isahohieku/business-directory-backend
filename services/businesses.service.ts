@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import {
     getBusinessesController,
     getRecentBusinessesController,
+    getBusinessesMetaController,
     addBusinessesController,
     removeBusinessesController,
     updateBusinessesController
@@ -32,6 +33,20 @@ class BusinessesService {
         try {
             let data;
             await getRecentBusinessesController(req)
+                .then((res): void => {
+                    data = res;
+                });
+
+            sendSuccess(res, 'businesses.controllers.ts', data, messages.NO_MESSAGE);
+        } catch (e) {
+            ErrorService.errorHandler(e, req, res, next);
+        }
+    }
+
+    public async getBusinessesMeta(req: Request, res: Response, next: NextFunction): Promise<void> {
+        try {
+            let data;
+            await getBusinessesMetaController(req)
                 .then((res): void => {
                     data = res;
                 });

@@ -47,6 +47,19 @@ const businessesEndpoints: Route[] = [
     },
 
     {
+        path: `${BUSINESSES_URL}/meta`,
+        method: HttpMethod.GET,
+        /**
+         * @method verifyToken to verify user token is valid and available
+         */
+        middlewares: [],
+        /**
+         * @method getBusinesses is a member of the @class Businesses.Service to get businesses
+         */
+        service: [BusinessesService.getBusinessesMeta]
+    },
+
+    {
         path: BUSINESSES_URL,
         method: HttpMethod.POST,
         /**

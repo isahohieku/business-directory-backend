@@ -6,6 +6,7 @@ import BusinessContactModel from '../models/businesscontact.model';
 import BusinessCategoriesModel from '../models/businesscategories.model';
 import BusinessImagesModel from '../models/businessimages.model';
 import BusinessViewsModel from '../models/businessviews.model';
+import CategoriesModel from '../models/categories.model';
 
 const knex = Knex(knexConfig as Knex.Config);
 
@@ -86,6 +87,28 @@ const getRecentBusinessesData =
                 ('[images(selectImageUrl), views(selectViews), categories(selectCategoriesForMost)]')
                 .orderBy('createdAt', 'DESC')
                 .limit(4);
+        return result;
+    };
+
+/**
+* @param id is the id of businesses passed into the @method getBusinessesData
+* @method getBusinessesData is a method to get a businesses or businessess
+*/
+const getBusinessesMetaData =
+    async (): Promise<undefined | any> => {
+
+        let images = await BusinessImagesModel.query().count();
+        let views = await BusinessViewsModel.query().sum('views');
+        let businesses = await BusinessesModel.query().count();
+        let categories = await CategoriesModel.query().count();
+
+        const result = {
+            images: images[0].count,
+            views: views[0].sum,
+            businesses: businesses[0].count,
+            categories: categories[0].count
+        };
+
         return result;
     };
 
@@ -199,6 +222,7 @@ const removeBusinessesData = async (id: string): Promise<number | undefined> => 
 export {
     getBusinessesData,
     getRecentBusinessesData,
+    getBusinessesMetaData,
     getBusinessDataByValue,
     addBusinessesData,
     updateBusinessesData,

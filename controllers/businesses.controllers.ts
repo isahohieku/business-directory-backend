@@ -1,7 +1,7 @@
 import { Request } from 'express';
 import { messages } from '../constants/messages.constants';
 import {
-    getBusinessesData, getRecentBusinessesData,
+    getBusinessesData, getRecentBusinessesData, getBusinessesMetaData,
     addBusinessesData, removeBusinessesData, updateBusinessesData
 } from '../data/businesses.data';
 import { CustomError } from '../lib/custom.error';
@@ -53,6 +53,29 @@ const getRecentBusinessesController
 
         return businesses;
     };
+
+/**
+* @method getBusinessesMetaController to get a businesses by a user
+*/
+const getBusinessesMetaController
+    = async (req: Request): Promise<BusinessesModel | BusinessesModel[] | undefined | void> => {
+
+        let businesses;
+
+        businesses = await getBusinessesMetaData()
+            .catch((e): void => {
+                console.log(e);
+                throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
+            });
+
+        if (!businesses) {
+            throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.ERROR_CONTACT_FOUND, 404);
+        }
+
+        return businesses;
+    };
+
+    
 
 /**
  * @method addBusinessesController is a demo method which should be changed (if need be)
@@ -172,6 +195,7 @@ const removeBusinessesController = async (req: Request): Promise<number | undefi
 export {
     getBusinessesController,
     getRecentBusinessesController,
+    getBusinessesMetaController,
     addBusinessesController,
     updateBusinessesController,
     removeBusinessesController
