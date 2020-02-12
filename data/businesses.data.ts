@@ -103,10 +103,10 @@ const getBusinessesMetaData =
         let categories = await CategoriesModel.query().count();
 
         const result = {
-            images: images[0].count,
-            views: views[0].sum,
-            businesses: businesses[0].count,
-            categories: categories[0].count
+            images: images[0],
+            views: views[0],
+            businesses: businesses[0],
+            categories: categories[0]
         };
 
         return result;

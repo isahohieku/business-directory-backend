@@ -58,17 +58,17 @@ class CategoriesModel extends Model {
     // See http://json-schema.org/ for more info.
 
     /** An example of the Objection jsonSchema */
-    public static get jsonSchema (): {} {
+    public static get jsonSchema(): {} {
         return {
             type: 'object',
             required: ['name'],
 
             properties: {
-                id: {type: 'integer'},
-                parentId: {type: ['integer', 'null']},
-                name: {type: 'string', minLength: 1, maxLength: 255},
-                createdAt: {type: 'string'},
-                updatedAt: {type: 'string'}
+                id: { type: 'integer' },
+                parentId: { type: ['integer', 'null'] },
+                name: { type: 'string', minLength: 1, maxLength: 255 },
+                createdAt: { type: 'string' },
+                updatedAt: { type: 'string' }
             }
         };
     }
