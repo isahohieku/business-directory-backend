@@ -81,7 +81,7 @@
 		"dotenv": "^6.2.0",
 		"express": "^4.16.4",
 		"express-paginate": "1.0.0",
-		"express-rate-limit": "3.4.0",
+		"express-rate-limit": "3.5.3",
 		"helmet": "3.15.1",
 		"joi": "^13.7.0",
 		"jsonwebtoken": "^8.4.0",
