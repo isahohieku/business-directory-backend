@@ -92,7 +92,7 @@
 		"objection": "^2.1.2",
 		"pg": "^7.11.0",
 		"uuid": "^3.3.2",
-		"winston": "^3.2.1"
+		"winston": "^3.3.0"
 	},
 	"nyc": {
 		"extension": [
