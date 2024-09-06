@@ -74,7 +74,7 @@
 	"dependencies": {
 		"bcrypt": "^3.0.4",
 		"body-parser": "^1.18.3",
-		"cloudinary": "^1.19.0",
+		"cloudinary": "^1.30.1",
 		"compression": "^1.7.4",
 		"cors": "2.8.5",
 		"cowsay": "^1.1.9",
@@ -84,15 +84,15 @@
 		"express-rate-limit": "3.4.0",
 		"helmet": "3.15.1",
 		"joi": "^13.7.0",
-		"jsonwebtoken": "^8.4.0",
-		"knex": "^0.20.8",
+		"jsonwebtoken": "^9.0.2",
+		"knex": "^0.95.1",
 		"lodash": "^4.17.11",
 		"mock-knex": "^0.4.6",
 		"moment": "^2.22.2",
-		"objection": "^2.1.2",
+		"objection": "^2.2.4",
 		"pg": "^7.11.0",
 		"uuid": "^3.3.2",
-		"winston": "^3.2.1"
+		"winston": "^3.3.4"
 	},
 	"nyc": {
 		"extension": [
