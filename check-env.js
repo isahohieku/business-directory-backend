@@ -13,10 +13,20 @@ const checkVariables = (variables) => {
     });
 
     if (missing.length) {
-        if (missing.length === 1) {
-            throw new Error(`Missing environment variable ${missing[0]}`);
+        const message = missing.length === 1 
+            ? `Missing environment variable ${missing[0]}`
+            : `Missing environment variables ${missing.join(', ')}`;
+        
+        if (process.env.NODE_ENV === 'development') {
+            console.warn(cowsay.say({
+                text: `WARNING: ${message}`,
+                e: "oO",
+                T: "U "
+            }));
+            return; // Don't exit in development
         }
-        throw new Error(`Missing environment variables ${missing.join(', ')}`);
+        
+        throw new Error(message);
     }
 };
 
