@@ -1,6 +1,6 @@
 import { Model } from 'objection';
 import moment from 'moment';
-import Knex from 'knex';
+import { knex as KnexFactory, Knex } from 'knex';
 import { knexConfig } from '../db/knexfile';
 import Businesses from './businesses.model';
 import CategoriesModel from './categories.model';
@@ -8,7 +8,7 @@ import BusinessImagesModel from './businessimages.model';
 import BusinessContactModel from './businesscontact.model';
 import BusinessesModel from './businesses.model';
 
-const knex = Knex(knexConfig as Knex.Config);
+const knex = KnexFactory(knexConfig as Knex.Config);
 Model.knex(knex);
 
 class BusinessViewsModel extends Model {

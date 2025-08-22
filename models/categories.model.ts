@@ -1,9 +1,9 @@
 import { Model } from 'objection';
 import moment from 'moment';
-import Knex from 'knex';
+import { knex as KnexFactory, Knex } from 'knex';
 import { knexConfig } from '../db/knexfile';
 
-const knex = Knex(knexConfig as Knex.Config);
+const knex = KnexFactory(knexConfig as Knex.Config);
 Model.knex(knex);
 
 class CategoriesModel extends Model {
