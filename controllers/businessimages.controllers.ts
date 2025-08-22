@@ -19,9 +19,9 @@ const getBusinessImagesController
 
     const data: BusinessImagesModel = new BusinessImagesModel;
 
-    data.id = id;
+    data.id = id as string;
 
-    const businessImages = await getBusinessImagesData(id)
+    const businessImages = await getBusinessImagesData(id as string)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });
@@ -71,7 +71,7 @@ const updateBusinessImagesController = async (req: Request): Promise<BusinessIma
 
     const data: BusinessImagesModel = new BusinessImagesModel;
 
-    data.id = id;
+    data.id = id as string;
 
     if (imageUrl) {
         data.imageUrl = imageUrl;
@@ -101,9 +101,9 @@ const removeBusinessImagesController = async (req: Request): Promise<number | un
 
     const data: BusinessImagesModel = new BusinessImagesModel;
 
-    data.id = id;
+    data.id = id as string;
 
-    const businessImages = await removeBusinessImagesData(id)
+    const businessImages = await removeBusinessImagesData(id as string)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });

@@ -144,7 +144,7 @@ const updateBusinessesController = async (req: Request): Promise<BusinessesModel
 
     const data: BusinessesModel = new BusinessesModel;
 
-    data.id = id;
+    data.id = Number(id);
 
     if (name) {
         data.name = name;
@@ -178,9 +178,9 @@ const removeBusinessesController = async (req: Request): Promise<number | undefi
 
     const data: BusinessesModel = new BusinessesModel;
 
-    data.id = id;
+    data.id = id ? Number(id as string) : undefined;
 
-    const businesses = await removeBusinessesData(id)
+    const businesses = await removeBusinessesData(id as string)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });

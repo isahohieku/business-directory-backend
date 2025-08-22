@@ -22,9 +22,9 @@ const getBusinessCategoriesController
 
         const data: BusinessCategoriesModel = new BusinessCategoriesModel;
 
-        data.id = id;
+        data.id = id ? Number(id as string) : undefined;
 
-        const businessCategories = await getBusinessCategoriesData(id)
+        const businessCategories = await getBusinessCategoriesData(id as string)
             .catch((): void => {
                 throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
             });
@@ -75,7 +75,7 @@ const updateBusinessCategoriesController
 
         const data: BusinessCategoriesModel = new BusinessCategoriesModel;
 
-        data.id = id;
+        data.id = Number(id);
 
         if (categoryId) {
             data.categoryId = categoryId;
@@ -105,9 +105,9 @@ const removeBusinessCategoriesController = async (req: Request): Promise<number 
 
     const data: BusinessCategoriesModel = new BusinessCategoriesModel;
 
-    data.id = id;
+    data.id = id ? Number(id as string) : undefined;
 
-    const businessCategories = await removeBusinessCategoriesData(id)
+    const businessCategories = await removeBusinessCategoriesData(id as string)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });

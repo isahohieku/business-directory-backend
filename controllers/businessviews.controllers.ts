@@ -21,9 +21,9 @@ const getBusinessViewsController
 
         const data: BusinessViewsModel = new BusinessViewsModel;
 
-        data.id = id;
+        data.id = id as string;
 
-        const businessViews = await getBusinessViewsData(id)
+        const businessViews = await getBusinessViewsData(id as string)
             .catch((): void => {
                 throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
             });
@@ -98,9 +98,9 @@ const removeBusinessViewsController = async (req: Request): Promise<number | und
 
     const data: BusinessViewsModel = new BusinessViewsModel;
 
-    data.id = id;
+    data.id = id as string;
 
-    const businessViews = await removeBusinessViewsData(id)
+    const businessViews = await removeBusinessViewsData(id as string)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });
