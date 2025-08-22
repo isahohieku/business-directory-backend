@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import Joi from 'joi';
 import { EndpointHandler } from '../lib/endpoint.handler';
 import { NextFunction, Request, Response } from 'express';
 import { CustomError } from '../lib/custom.error';
@@ -7,7 +7,7 @@ import { messages } from '../constants/messages.constants';
 import { logger } from '../utils/logger';
 import { pickToken, verifyTok } from '../utils/auth.util';
 
-const signupValidator = Joi.object().keys({
+const signupValidator = Joi.object({
     email: Joi.string()
         .email()
         .required(),
@@ -15,7 +15,7 @@ const signupValidator = Joi.object().keys({
     fullName: Joi.string().required()
 });
 
-const loginValidator = Joi.object().keys({
+const loginValidator = Joi.object({
     email: Joi.string()
         .email()
         .required(),
@@ -24,20 +24,20 @@ const loginValidator = Joi.object().keys({
 
 const validateSignup: EndpointHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        await Joi.validate(req.body, signupValidator);
+        await signupValidator.validateAsync(req.body);
         next();
-    } catch (e) {
-        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+    } catch (e: any) {
+        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details || e.message);
         next(error);
     }
 };
 
 const validateLogin: EndpointHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        await Joi.validate(req.body, loginValidator);
+        await loginValidator.validateAsync(req.body);
         next();
-    } catch (e) {
-        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+    } catch (e: any) {
+        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details || e.message);
         next(error);
     }
 };

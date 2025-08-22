@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import Joi from 'joi';
 import { EndpointHandler } from '../lib/endpoint.handler';
 import { NextFunction, Request, Response } from 'express';
 import { ErrorService } from '../services';
@@ -8,14 +8,14 @@ import { messages } from '../constants/messages.constants';
 
 /** Sample @method name - please change where needed */
 
-const businessesValidator = Joi.object().keys({
+const businessesValidator = Joi.object({
     /** Sample joi schema */
     name: Joi.string()
         .required(),
     description: Joi.string().required()
 });
 
-const businessesUpdateValidator = Joi.object().keys({
+const businessesUpdateValidator = Joi.object({
     /** Sample joi schema */
     name: Joi.string()
         .optional(),
@@ -25,10 +25,10 @@ const businessesUpdateValidator = Joi.object().keys({
 
 const validateBusinesses: EndpointHandler = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        await Joi.validate(req.body, businessesValidator);
+        await businessesValidator.validateAsync(req.body);
         next();
-    } catch (e) {
-        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+    } catch (e: any) {
+        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details || e.message);
         ErrorService.errorHandler(error, req, res, next);
     }
 };
@@ -36,10 +36,10 @@ const validateBusinesses: EndpointHandler = async (req: Request, res: Response, 
 const validateBusinessesUpdate: EndpointHandler
     = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
-            await Joi.validate(req.body, businessesUpdateValidator);
+            await businessesUpdateValidator.validateAsync(req.body);
             next();
-        } catch (e) {
-            const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+        } catch (e: any) {
+            const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details || e.message);
             ErrorService.errorHandler(error, req, res, next);
         }
     };
