@@ -16,12 +16,13 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1d';
 const userData = ['fullName', 'id', 'createdAt', 'updatedAt', 'email'];
 
 const generateJWT = (model: LoginModel): string => {
-    return jwt.sign(model, SECRET_KEY, {
+    const options: jwt.SignOptions = {
         algorithm: 'HS256',
         expiresIn: JWT_EXPIRES_IN,
-        issuer: JWT_ISSUER,
-        audience: JWT_AUDIENCE
-    });
+    };
+    if (JWT_ISSUER) options.issuer = JWT_ISSUER;
+    if (JWT_AUDIENCE) options.audience = JWT_AUDIENCE;
+    return jwt.sign(model, SECRET_KEY, options);
 };
 
 const generateEncryptedPassword = async (data: string | undefined): Promise<string | undefined> => {
