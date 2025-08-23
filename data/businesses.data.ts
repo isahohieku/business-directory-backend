@@ -1,6 +1,6 @@
 import BusinessesModel from '../models/businesses.model';
 import { transaction, Transaction } from 'objection';
-import Knex from 'knex';
+import { knex as KnexFactory, Knex } from 'knex';
 import { knexConfig } from '../db/knexfile';
 import BusinessContactModel from '../models/businesscontact.model';
 import BusinessCategoriesModel from '../models/businesscategories.model';
@@ -8,7 +8,7 @@ import BusinessImagesModel from '../models/businessimages.model';
 import BusinessViewsModel from '../models/businessviews.model';
 import CategoriesModel from '../models/categories.model';
 
-const knex = Knex(knexConfig as Knex.Config);
+const knex = KnexFactory(knexConfig as Knex.Config);
 
 /**
  * @param id is the id of businesses passed into the @method getBusinessesData

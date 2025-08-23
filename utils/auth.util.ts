@@ -9,13 +9,20 @@ import LoginModel from '../models/login.model';
 import * as _ from 'lodash';
 import { Request, Response } from 'express';
 
-const SECRET_KEY = process.env.JWT_SECRET;
+const SECRET_KEY = process.env.JWT_SECRET as string;
+const JWT_ISSUER = process.env.JWT_ISSUER;
+const JWT_AUDIENCE = process.env.JWT_AUDIENCE;
+const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '1d';
 const userData = ['fullName', 'id', 'createdAt', 'updatedAt', 'email'];
 
 const generateJWT = (model: LoginModel): string => {
-    return jwt.sign(model, SECRET_KEY as jwt.Secret, {
-        expiresIn: 60 * 60 * 24 // expires in a day
-    });
+    const options: jwt.SignOptions = {
+        algorithm: 'HS256',
+        expiresIn: JWT_EXPIRES_IN,
+    };
+    if (JWT_ISSUER) options.issuer = JWT_ISSUER;
+    if (JWT_AUDIENCE) options.audience = JWT_AUDIENCE;
+    return jwt.sign(model, SECRET_KEY, options);
 };
 
 const generateEncryptedPassword = async (data: string | undefined): Promise<string | undefined> => {
@@ -41,14 +48,16 @@ const pickToken = (req: Request): string | undefined => {
 
 const verifyTok = (req: Request, res: Response, token: string): string | object | undefined => {
     if (typeof SECRET_KEY === 'string') {
-        let decodedToken;
-        
-        jwt.verify(token, SECRET_KEY, (err, decoded): void => {
-            if (err) {
-                throw new CustomError(codes.ERROR_INVALID_TOKEN, messages.ERROR_INVALID_TOKEN, 401);
-            }
-            decodedToken = decoded;
-        });
+        let decodedToken: any;
+        try {
+            decodedToken = jwt.verify(token, SECRET_KEY, {
+                algorithms: ['HS256'],
+                issuer: JWT_ISSUER,
+                audience: JWT_AUDIENCE
+            });
+        } catch (err) {
+            throw new CustomError(codes.ERROR_INVALID_TOKEN, messages.ERROR_INVALID_TOKEN, 401);
+        }
         return decodedToken;
     }
 };

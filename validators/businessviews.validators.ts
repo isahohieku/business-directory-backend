@@ -1,4 +1,4 @@
-import * as Joi from 'joi';
+import Joi from 'joi';
 import { EndpointHandler } from '../lib/endpoint.handler';
 import { NextFunction, Request, Response } from 'express';
 import { ErrorService } from '../services';
@@ -8,36 +8,36 @@ import { messages } from '../constants/messages.constants';
 
 /** Sample @method name - please change where needed */
 
-const businessViewsValidator = Joi.object().keys({
+const businessViewsValidator = Joi.object({
     /** Sample joi schema */
     businessId: Joi.number()
         .required()
 });
 
-const businessViewsUpdateValidator = Joi.object().keys({
+const businessViewsUpdateValidator = Joi.object({
     /** Sample joi schema */
     id: Joi.number()
         .required()
 });
 
-const validateBusinessViews: EndpointHandler 
+const validateBusinessViews: EndpointHandler
 = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        await Joi.validate(req.body, businessViewsValidator);
+        await businessViewsValidator.validateAsync(req.body);
         next();
-    } catch (e) {
-        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+    } catch (e: any) {
+        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details || e.message);
         ErrorService.errorHandler(error, req, res, next);
     }
 };
 
-const validateBusinessViewsUpdate: EndpointHandler 
+const validateBusinessViewsUpdate: EndpointHandler
 = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
     try {
-        await Joi.validate(req.body, businessViewsUpdateValidator);
+        await businessViewsUpdateValidator.validateAsync(req.body);
         next();
-    } catch (e) {
-        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details);
+    } catch (e: any) {
+        const error = new CustomError(codes.UNPROCESSED_ENTITY, messages.ERROR_UNPROCESSED_ENTITY, 422, e.details || e.message);
         ErrorService.errorHandler(error, req, res, next);
     }
 };

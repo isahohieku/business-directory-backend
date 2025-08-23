@@ -7,14 +7,16 @@ import { logger } from '../utils/logger';
 
 const development = {
     client: 'pg',
-    connection: {
+    connection: process.env.DATABASE_URL ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
+    } : {
         host: process.env.DB_HOST,
         database: process.env.DB_NAME,
-        connectionString: process.env.DATABASE_URL,
         user: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT,
-        ssl: false
+        port: Number(process.env.DB_PORT),
+        ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : false,
     },
     migrations: {
         tableName: 'knex_migrations',
@@ -43,7 +45,8 @@ const test = {
         database: process.env.DB_NAME,
         user: process.env.DB_USERNAME,
         password: process.env.DB_PASSWORD,
-        port: process.env.DB_PORT
+        port: Number(process.env.DB_PORT),
+        ssl: false
     },
     migrations: {
         tableName: 'knex_migrations',
@@ -64,16 +67,17 @@ const test = {
 
 const _Config = {
     getKnexInstance(): any {
-        // if (process.env.SITE === 'production') {
-        //     return this.production;
-        // }
         if (process.env.NODE_ENV === 'test') {
             return this.test;
         }
-
-        if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'production') {
+        if (process.env.NODE_ENV === 'development') {
             return this.development;
         }
+        if (process.env.NODE_ENV === 'production') {
+            return this.development;
+        }
+        // Default to development config if NODE_ENV is not set
+        return this.development;
     },
     development,
     test

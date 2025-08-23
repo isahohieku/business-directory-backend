@@ -6,13 +6,13 @@ import BusinessCategoriesModel from '../models/businesscategories.model';
  * @method getCategoriesData is a method to get a categories or categoriess
  */
 const getCategoriesData =
-    async (id: string): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
+    async (id?: string | number): Promise<CategoriesModel | CategoriesModel[] | undefined> => {
         if (!id) {
             let result = await CategoriesModel.query();
             return result;
         }
 
-        const result = await CategoriesModel.query().where({ id }).first();
+        const result = await CategoriesModel.query().where({ id: Number(id) }).first();
         return result;
     };
 
@@ -52,8 +52,8 @@ const updateCategoriesData = async (data: CategoriesModel): Promise<CategoriesMo
  * @param categories is the id of categories passed into the @method removeCategoriesData
  * @method removeCategoriesData is a method to remove a categories
  */
-const removeCategoriesData = async (id: string): Promise<number | undefined> => {
-    const result = await CategoriesModel.query().delete().where({ id });
+const removeCategoriesData = async (id: string | number): Promise<number | undefined> => {
+    const result = await CategoriesModel.query().delete().where({ id: Number(id) });
     return result;
 };
 

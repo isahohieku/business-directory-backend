@@ -1,17 +1,18 @@
 import {
     handleCors,
     handleHelmet,
-    // handlePaginate,
-    // handleRateLimiter,
+    handleRateLimiter,
     handleCompression,
-    handleRequestParsing
+    handleRequestParsing,
+    handleRequestLogging
 } from './common.middlewares';
 
 export default [
     handleHelmet,
     handleCompression,
     handleCors,
-    // handlePaginate, 
-    // handleRateLimiter, 
+    handleRequestLogging,
+
+    handleRateLimiter,
     handleRequestParsing
 ];

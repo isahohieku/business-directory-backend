@@ -22,18 +22,18 @@ Promise<CategoriesModel | CategoriesModel[] | undefined | void> => {
 
     const data: CategoriesModel = new CategoriesModel;
 
-    data.id = id;
+    data.id = id ? Number(id as string) : undefined;
 
     let categories;
 
     if (term || req.route.path === '/api/categories/search') {
-        return categories = await getCategoriesDataByValue(term)
+        return categories = await getCategoriesDataByValue(String(term || ""))
             .catch((): void => {
                 throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
             });
     }
 
-    categories = await getCategoriesData(id)
+    categories = await getCategoriesData(id as string)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });
@@ -110,9 +110,9 @@ const removeCategoriesController = async (req: Request): Promise<number | undefi
 
     const data: CategoriesModel = new CategoriesModel;
 
-    data.id = id;
+    data.id = id ? Number(id as string) : undefined;
 
-    const categories = await removeCategoriesData(id)
+    const categories = await removeCategoriesData(id as string)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });

@@ -19,9 +19,9 @@ const getBusinessContactController
 
         const data: BusinessContactModel = new BusinessContactModel;
 
-        data.id = id;
+        data.id = id as string;
 
-        const businessContact = await getBusinessContactData(id)
+        const businessContact = await getBusinessContactData(id as string)
             .catch((): void => {
                 throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
             });
@@ -74,7 +74,7 @@ const updateBusinessContactController = async (req: Request): Promise<BusinessCo
 
     const data: BusinessContactModel = new BusinessContactModel;
 
-    data.id = id;
+    data.id = id as string;
 
     if (website) {
         data.website = website;
@@ -112,9 +112,9 @@ const removeBusinessContactController = async (req: Request): Promise<number | u
 
     const data: BusinessContactModel = new BusinessContactModel;
 
-    data.id = id;
+    data.id = id as string;
 
-    const businessContact = await removeBusinessContactData(id)
+    const businessContact = await removeBusinessContactData(id as string)
         .catch((): void => {
             throw new CustomError(codes.DEFAULT_ERROR_CODE, messages.GENERIC, 500);
         });
