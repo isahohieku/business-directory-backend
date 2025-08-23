@@ -75,8 +75,10 @@ process.on('SIGTERM', () => shutdown('SIGTERM'));
 const { PORT } = process.env;
 const httpServer = new http.Server(app);
 
-httpServer.listen(PORT, (): void => {
-    logger('app.ts', `App is listening on port ${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+    httpServer.listen(PORT, (): void => {
+        logger('app.ts', `App is listening on port ${PORT}`);
+    });
+}
 
 export { app };

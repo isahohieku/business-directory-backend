@@ -5,7 +5,7 @@
 	"main": "./build/app/app.js",
 	"scripts": {
 		"prestart": "node check-env.js DB_HOST DB_USERNAME DB_PASSWORD DB_NAME DB_PORT JWT_SECRET NODE_ENV LOG_LEVEL PORT",
-		"test": "nyc mocha --exit",
+		"test": "cross-env NODE_ENV=test PORT=0 nyc --check-coverage=false mocha --require ts-node/register --extension ts --recursive 'test/**/*.ts' --exit",
 		"pretest": "npm run prestart",
 		"make-js": "knex migrate:make --env development --knexfile ./db/knexfile.js",
 		"make": "knex --env development --knexfile ./db/knexfile.ts -x ts migrate:make",
